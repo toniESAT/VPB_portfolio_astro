@@ -1,5 +1,6 @@
 ---
-
+import NavButton from "../components/NavButton.astro";
+import NavDropdown from "../components/NavDropdown.astro";
 ---
 
 <header>
@@ -10,21 +11,15 @@
   </div>
   <nav class="nav-bar">
     <ul class="nav-list">
-      <a href="">
-        <li>HOME</li>
-      </a>
-      <a href="">
-        <li>CONCEPT</li>
-      </a>
-      <a href="">
-        <li>ILLUSTRATION</li>
-      </a>
-      <a href="">
-        <li>PROJECTS</li>
-      </a>
-      <a href="">
-        <li>ABOUT ME</li>
-      </a>
+      <NavButton href="">HOME</NavButton>
+      <NavButton href="">CONCEPT</NavButton>
+      <NavButton href="">ILLUSTRATION</NavButton>
+      <NavDropdown name="PROJECTS">
+        <NavButton href="">SKY IS DEAD</NavButton>
+        <NavButton href="">ETHERNA</NavButton>
+        <NavButton href="">ANIMALS A-Z</NavButton>
+      </NavDropdown>
+      <NavButton href="">ABOUT ME</NavButton>
     </ul>
   </nav>
 </header>
@@ -53,20 +48,11 @@
 
   .nav-list {
     padding: 0 20%;
-    height: 2rem;
+    height: auto;
     margin: 0;
     display: flex;
     list-style-type: none;
     justify-content: space-around;
-  }
-
-  .nav-list a {
-    font-weight: 600;
-    height: 2rem;
-  }
-
-  .nav-list li:hover {
-    text-underline-offset: 3pt;
-    text-decoration: underline;
+    align-items: center;
   }
 </style>

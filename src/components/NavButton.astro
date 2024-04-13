@@ -1,0 +1,24 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+
+import NavItem from "./NavItem.astro";
+---
+
+<a href={href}>
+  <NavItem>
+    <slot />
+  </NavItem>
+
+  <style>
+    a {
+      display: block;
+      font-weight: 600;
+      padding: 1rem;
+      white-space: nowrap;
+    }
+  </style>
+</a>

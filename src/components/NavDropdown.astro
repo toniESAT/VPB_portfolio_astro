@@ -1,0 +1,52 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name: title } = Astro.props;
+
+import NavItem from "./NavItem.astro";
+---
+
+<div class="dropdown">
+  <NavItem>{title}</NavItem>
+  <div class="dropdown-menu">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .dropdown {
+    position: relative;
+    display: block;
+    font-weight: 600;
+    padding: 1rem;
+    white-space: nowrap;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    left: -25%;
+    top: calc(100% + 0.25rem);
+    background-color: black;
+    box-shadow: 2px 2px 5px 0 grey;
+    padding: 0.75rem;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    transition:
+      opacity 150ms ease-in-out,
+      transform 150ms ease-in-out;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .dropdown:active .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
