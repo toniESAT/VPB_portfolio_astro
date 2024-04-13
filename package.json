@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
+    "@fontsource-variable/open-sans": "^5.0.28",
+    "@fontsource/open-sans": "^5.0.27",
     "@typescript-eslint/parser": "^7.6.0",
     "astro": "^4.6.0",
     "eslint": "^9.0.0",

@@ -2,6 +2,8 @@
 import NavButton from "../components/NavButton.astro";
 import NavDropdown from "../components/NavDropdown.astro";
 
+import "@fontsource-variable/open-sans"
+
 ---
 
 <header id="header">
@@ -51,7 +53,6 @@ import NavDropdown from "../components/NavDropdown.astro";
 
   header {
     margin: 0;
-    font-family: MenuFont;
     display: block;
     background-color: black;
     color: white;
@@ -75,7 +76,6 @@ import NavDropdown from "../components/NavDropdown.astro";
     background-color: black;
     box-shadow: 0 2px 5px 0 grey;
     clip-path: inset(0px -10px -100vh -10px); /* Remove top shadow */
-    
   }
 
   .nav-list {
