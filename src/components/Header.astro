@@ -1,9 +1,10 @@
 ---
 import NavButton from "../components/NavButton.astro";
 import NavDropdown from "../components/NavDropdown.astro";
+
 ---
 
-<header>
+<header id="header">
   <div class="logo-container">
     <a href="">
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
@@ -11,15 +12,15 @@ import NavDropdown from "../components/NavDropdown.astro";
   </div>
   <nav id="navbar" class="nav-bar">
     <ul class="nav-list">
-      <NavButton href="">HOME</NavButton>
-      <NavButton href="">CONCEPT</NavButton>
-      <NavButton href="">ILLUSTRATION</NavButton>
+      <NavButton href="/VPB_portfolio_astro/">HOME</NavButton>
+      <NavButton href="/VPB_portfolio_astro/concept">CONCEPT</NavButton>
+      <NavButton href="/VPB_portfolio_astro/illustration">ILLUSTRATION</NavButton>
       <NavDropdown name="PROJECTS">
-        <NavButton href="">SKY IS DEAD</NavButton>
-        <NavButton href="">ETHERNA</NavButton>
-        <NavButton href="">ANIMALS A-Z</NavButton>
+        <NavButton href="/VPB_portfolio_astro/skyisdead">SKY IS DEAD</NavButton>
+        <NavButton href="/VPB_portfolio_astro/etherna">ETHERNA</NavButton>
+        <NavButton href="/VPB_portfolio_astro/animals">ANIMALS A-Z</NavButton>
       </NavDropdown>
-      <NavButton href="">ABOUT ME</NavButton>
+      <NavButton href="/VPB_portfolio_astro/about">ABOUT ME</NavButton>
     </ul>
   </nav>
 </header>
@@ -29,9 +30,9 @@ import NavDropdown from "../components/NavDropdown.astro";
     addSticky();
   };
 
-  var navbar = document.getElementById("navbar")!;
+  var navbar = document.getElementById("header")!;
 
-  var sticky = navbar.offsetTop;
+  var sticky = 80;
 
   function addSticky() {
     if (window.scrollY >= sticky) {
@@ -43,6 +44,11 @@ import NavDropdown from "../components/NavDropdown.astro";
 </script>
 
 <style>
+
+  :root {
+    --logo-height: 5rem;
+  }
+
   header {
     margin: 0;
     font-family: MenuFont;
@@ -53,7 +59,7 @@ import NavDropdown from "../components/NavDropdown.astro";
 
   .logo-container {
     display: flex;
-    height: 5rem;
+    height: var(--logo-height);
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -65,9 +71,11 @@ import NavDropdown from "../components/NavDropdown.astro";
   }
 
   .nav-bar {
+    position:sticky;
     background-color: black;
     box-shadow: 0 2px 5px 0 grey;
     clip-path: inset(0px -10px -100vh -10px); /* Remove top shadow */
+    
   }
 
   .nav-list {
@@ -81,8 +89,8 @@ import NavDropdown from "../components/NavDropdown.astro";
   }
 
   .sticky {
-    position: fixed;
-    top: 0;
+    position: sticky;
+    top: calc(-1 * var(--logo-height));
     width: 100%;
   }
 </style>
