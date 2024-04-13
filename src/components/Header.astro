@@ -9,7 +9,7 @@ import NavDropdown from "../components/NavDropdown.astro";
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
-  <nav class="nav-bar">
+  <nav id="navbar" class="nav-bar">
     <ul class="nav-list">
       <NavButton href="">HOME</NavButton>
       <NavButton href="">CONCEPT</NavButton>
@@ -23,6 +23,24 @@ import NavDropdown from "../components/NavDropdown.astro";
     </ul>
   </nav>
 </header>
+
+<script>
+  window.onscroll = function () {
+    addSticky();
+  };
+
+  var navbar = document.getElementById("navbar")!;
+
+  var sticky = navbar.offsetTop;
+
+  function addSticky() {
+    if (window.scrollY >= sticky) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
+</script>
 
 <style>
   header {
@@ -46,6 +64,9 @@ import NavDropdown from "../components/NavDropdown.astro";
     font-weight: 600;
   }
 
+  .nav-bar {
+    background-color: black;
+  }
   .nav-list {
     padding: 0 20%;
     height: auto;
@@ -54,5 +75,11 @@ import NavDropdown from "../components/NavDropdown.astro";
     list-style-type: none;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
 </style>
