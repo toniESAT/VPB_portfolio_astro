@@ -9,6 +9,7 @@ import Footer from "../components/Footer.astro";
 const { title } = Astro.props;
 
 import "../styles/normalize.css";
+import "@fontsource-variable/open-sans"
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ import "../styles/normalize.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width">
 		<link
 			rel="icon"
 			type="image/svg+xml"
@@ -38,8 +39,10 @@ import "../styles/normalize.css";
 			box-sizing: border-box;
 		}
 
-		html {
+		html, body {
 			scroll-behavior: smooth;
+			width:100vw;
+			height:100svh;
 		}
 
 		body {
