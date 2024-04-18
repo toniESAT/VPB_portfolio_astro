@@ -1,17 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageTitle from "../components/PageTitle.astro";
+import GalleryAstro from "../components/GalleryAstro.astro";
+
+// const img_metadata = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/DnD/*.{jpeg,jpg,png}");
+const img_metadata = await Astro.glob("/src/assets/images/DnD/*.{jpeg,jpg,png}")
 ---
 
 <Layout title="Concept Art by Víctor Pérez Brotons">
 	<main>
 		<PageTitle>Concept Art</PageTitle>
-		<div class="content"></div>
+		<GalleryAstro img_metadata={img_metadata} />
 	</main>
 </Layout>
 
-<style>
-	.content {
-		height: 300vw;
-	}
-</style>
+<style></style>
