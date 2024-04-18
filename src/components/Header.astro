@@ -6,6 +6,11 @@ import "@fontsource-variable/open-sans"
 
 ---
 
+<script>
+  const buttons = Array.from(document.getElementsByClassName("nav-item"))
+  buttons.forEach(button => button.addEventListener("click", ()=>button.classList.add("selected")))
+</script>
+
 <header id="header">
   <div class="logo-container">
     <a href="">

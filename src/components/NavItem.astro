@@ -2,8 +2,8 @@
 
 ---
 
-<div class="nav-item">
-  <li><slot /><div class="underline"></div></li>
+<div class="nav-item" transition:persist>
+  <li><slot /><div class="underline" transition:persist></div></li>
 </div>
 
 <style>
@@ -31,5 +31,12 @@
 
   li:hover > .underline {
     width: 100%;
+  }
+
+  .selected li .underline {
+    width: 100%;
+    border-bottom: 2px solid red;
+
+
   }
 </style>
