@@ -3,7 +3,8 @@
 ---
 
 <div class="nav-item" transition:persist>
-  <li><slot /><div class="underline" transition:persist></div></li>
+  <slot />
+  <div class="underline" transition:persist></div>
 </div>
 
 <style>
@@ -12,9 +13,6 @@
     margin-inline: auto;
     padding: 1rem;
     width: fit-content;
-  }
-
-  li {
     text-align: center;
     font-weight: 500;
   }
@@ -22,21 +20,18 @@
   .underline {
     margin: 0;
     width: 0%;
-    position:relative;
+    position: relative;
     bottom: -5px;
     margin-inline: auto;
     border-bottom: 2px solid white;
     transition: width 400ms ease;
   }
 
-  li:hover > .underline {
+  .nav-item:hover > .underline {
     width: 100%;
   }
 
-  .selected li .underline {
+  .selected > .underline {
     width: 100%;
-    border-bottom: 2px solid red;
-
-
   }
 </style>

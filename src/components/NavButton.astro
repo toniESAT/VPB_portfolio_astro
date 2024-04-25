@@ -8,15 +8,18 @@ const { href } = Astro.props;
 import NavItem from "./NavItem.astro";
 ---
 
-<a href={href}>
-  <NavItem>
-    <slot />
-  </NavItem>
+<li>
+  <a href={href}>
+    <NavItem>
+      <slot />
+    </NavItem>
+  </a>
+</li>
 
-  <style>
-    a {
-      display: block;
-      white-space: nowrap;
-    }
-  </style>
-</a>
+
+<style>
+  a {
+    display: block;
+    white-space: nowrap;
+  }
+</style>

@@ -2,14 +2,8 @@
 import NavButton from "../components/NavButton.astro";
 import NavDropdown from "../components/NavDropdown.astro";
 
-import "@fontsource-variable/open-sans"
-
+import "@fontsource-variable/open-sans";
 ---
-
-<script>
-  const buttons = Array.from(document.getElementsByClassName("nav-item"))
-  buttons.forEach(button => button.addEventListener("click", ()=>button.classList.add("selected")))
-</script>
 
 <header id="header">
   <div class="logo-container">
@@ -19,39 +13,49 @@ import "@fontsource-variable/open-sans"
   </div>
   <nav id="navbar" class="nav-bar">
     <ul class="nav-list">
+      <li><div class="spacer"></div></li>
       <NavButton href="/VPB_portfolio_astro/">HOME</NavButton>
       <NavButton href="/VPB_portfolio_astro/concept">CONCEPT</NavButton>
-      <NavButton href="/VPB_portfolio_astro/illustration">ILLUSTRATION</NavButton>
+      <NavButton href="/VPB_portfolio_astro/illustration"
+        >ILLUSTRATION</NavButton
+      >
       <NavDropdown name="PROJECTS">
         <NavButton href="/VPB_portfolio_astro/skyisdead">SKY IS DEAD</NavButton>
         <NavButton href="/VPB_portfolio_astro/etherna">ETHERNA</NavButton>
         <NavButton href="/VPB_portfolio_astro/animals">ANIMALS A-Z</NavButton>
       </NavDropdown>
       <NavButton href="/VPB_portfolio_astro/about">ABOUT ME</NavButton>
+      <li><div class="spacer"></div></li>
     </ul>
   </nav>
 </header>
 
 <script>
-  window.onscroll = function () {
-    addSticky();
-  };
-
-  var navbar = document.getElementById("header")!;
-
-  var sticky = 80;
+  const buttons = Array.from(document.getElementsByClassName("nav-item"));
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      buttons.forEach((button) => {
+        if (e.target == button) button.classList.add("selected");
+        else button.classList.remove("selected");
+      });
+    });
+  });
 
   function addSticky() {
-    if (window.scrollY >= sticky) {
+    const navbar = document.getElementById("header")!;
+    const sticky = 80;
+
+    if (document.body.scrollTop >= sticky) {
       navbar.classList.add("sticky");
     } else {
       navbar.classList.remove("sticky");
     }
   }
+
+  document.body.addEventListener("scroll", addSticky);
 </script>
 
 <style>
-
   :root {
     --logo-height: 5rem;
   }
@@ -61,6 +65,7 @@ import "@fontsource-variable/open-sans"
     display: block;
     background-color: black;
     color: white;
+    z-index: 1000;
   }
 
   .logo-container {
@@ -69,6 +74,8 @@ import "@fontsource-variable/open-sans"
     text-align: center;
     justify-content: center;
     align-items: center;
+    background-color: black;
+    z-index: 50;
   }
 
   .logo {
@@ -77,20 +84,25 @@ import "@fontsource-variable/open-sans"
   }
 
   .nav-bar {
-    position:sticky;
     background-color: black;
-    box-shadow: 0 2px 5px 0 grey;
-    clip-path: inset(0px -10px -100vh -10px); /* Remove top shadow */
+    box-shadow:
+      5px 5px 5px -5px grey,
+      -5px 5px 5px -5px grey;
+    z-index: 40;
   }
 
   .nav-list {
-    padding: 0 20%;
     height: auto;
-    margin: 0;
     display: flex;
+    /* flex-wrap: wrap; */
     list-style-type: none;
     justify-content: space-around;
     align-items: center;
+    margin: 0;
+  }
+
+  .spacer {
+    flex-shrink: 2;
   }
 
   .sticky {
