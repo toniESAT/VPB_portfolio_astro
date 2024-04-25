@@ -8,8 +8,12 @@ const { name: title } = Astro.props;
 import NavItem from "./NavItem.astro";
 ---
 
-<div class="dropdown">
-  <NavItem>{title}</NavItem>
+<div class="dropdown" id="project-dropdown">
+  <NavItem>
+    {title}
+    <div class="underline" transition:persist></div>
+  </NavItem>
+
   <ul class="dropdown-menu">
     <slot />
   </ul>
@@ -44,11 +48,25 @@ import NavItem from "./NavItem.astro";
       transform 150ms ease-in-out;
   }
 
-
   .dropdown:hover .dropdown-menu,
   .dropdown-menu:hover {
     opacity: 1;
     transform: translateY(0);
     z-index: 1000;
+  }
+
+  .underline {
+    margin: 0;
+    width: 0%;
+    position: relative;
+    bottom: -5px;
+    margin-inline: auto;
+    border-bottom: 2px solid white;
+    transition: width 400ms ease;
+  }
+
+  .selected .underline,
+  .dropdown:hover .underline {
+    width: 100%;
   }
 </style>

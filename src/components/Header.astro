@@ -5,7 +5,7 @@ import NavDropdown from "../components/NavDropdown.astro";
 import "@fontsource-variable/open-sans";
 ---
 
-<header id="header">
+<header id="header" transition:persist>
   <div class="logo-container">
     <a href="">
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
@@ -20,9 +20,15 @@ import "@fontsource-variable/open-sans";
         >ILLUSTRATION</NavButton
       >
       <NavDropdown name="PROJECTS">
-        <NavButton href="/VPB_portfolio_astro/skyisdead">SKY IS DEAD</NavButton>
-        <NavButton href="/VPB_portfolio_astro/etherna">ETHERNA</NavButton>
-        <NavButton href="/VPB_portfolio_astro/animals">ANIMALS A-Z</NavButton>
+        <NavButton isproject href="/VPB_portfolio_astro/skyisdead"
+          >SKY IS DEAD</NavButton
+        >
+        <NavButton isproject href="/VPB_portfolio_astro/etherna"
+          >ETHERNA</NavButton
+        >
+        <NavButton isproject href="/VPB_portfolio_astro/animals"
+          >ANIMALS A-Z</NavButton
+        >
       </NavDropdown>
       <NavButton href="/VPB_portfolio_astro/about">ABOUT ME</NavButton>
       <li><div class="spacer"></div></li>
@@ -31,12 +37,19 @@ import "@fontsource-variable/open-sans";
 </header>
 
 <script>
-  const buttons = Array.from(document.getElementsByClassName("nav-item"));
+  const buttons = Array.from(document.getElementsByClassName("nav-button"));
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
       buttons.forEach((button) => {
-        if (e.target == button) button.classList.add("selected");
-        else button.classList.remove("selected");
+        if (e.currentTarget == button) {
+          const dropdown = document.getElementById("project-dropdown");
+          if (button.classList.contains("project-button")) {
+            dropdown?.classList.add("selected")
+          } else {
+            dropdown?.classList.remove("selected")
+          }
+          button.classList.add("selected");
+        } else button.classList.remove("selected");
       });
     });
   });

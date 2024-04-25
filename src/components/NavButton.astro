@@ -1,25 +1,49 @@
 ---
 interface Props {
   href: string;
+  isproject?: boolean;
 }
 
-const { href } = Astro.props;
+const { href, isproject = false } = Astro.props;
 
 import NavItem from "./NavItem.astro";
 ---
 
 <li>
   <a href={href}>
-    <NavItem>
-      <slot />
-    </NavItem>
+    <div class=`nav-button ${isproject ? "project-button" : "" }` transition:persist>
+      <NavItem>
+        <slot />
+        <div class="underline" transition:persist></div>
+      </NavItem>
+    </div>
   </a>
 </li>
-
 
 <style>
   a {
     display: block;
     white-space: nowrap;
+  }
+
+  .nav-button {
+  }
+
+  .underline {
+    margin: 0;
+    width: 0%;
+    position: relative;
+    bottom: -5px;
+    margin-inline: auto;
+    border-bottom: 2px solid white;
+    transition: width 400ms ease;
+  }
+
+  .nav-button:hover .underline {
+    width: 100%;
+  }
+
+  .selected .underline {
+    width: 100%;
   }
 </style>
