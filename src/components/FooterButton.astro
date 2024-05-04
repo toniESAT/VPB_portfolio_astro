@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  isproject?: boolean;
+}
+
+const { href, isproject = false } = Astro.props;
+
+import NavItem from "./NavItem.astro";
+---
+
+<li>
+  <a href={href}>
+    <slot />
+  </a>
+</li>
+
+<style>
+  a {
+    display: block;
+    white-space: nowrap;
+    margin: 0 1rem;
+    font-weight: 500;
+    position: relative;
+    top: 0px;
+    transition: all 400ms ease;
+  }
+
+  a:hover {
+    top: -2px;
+    font-variation-settings: "wght" 700;
+  }
+
+</style>
