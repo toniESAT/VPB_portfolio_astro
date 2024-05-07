@@ -33,7 +33,7 @@
     <div id="text" class="input-wrapper">
       <label for="subject"></label>
       <textarea
-        class="input-textbosx"
+        class="input-textbox"
         id="subject"
         name="subject"
         placeholder="WHAT'S ON YOUR MIND?"
@@ -43,6 +43,10 @@
 </form>
 
 <style>
+  :root {
+    --border-thickness: 2px;
+  }
+
   .contact-form {
     display: flex;
     justify-items: space-around;
@@ -63,8 +67,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    /* width: 50%; */
-    /* flex-grow: 1; */
     position: relative;
   }
 
@@ -80,10 +82,12 @@
   .input-textbox {
     background-color: black;
     color: white;
-    padding: 1rem;
+    margin: 0;
     width: 100%;
     height: 100%;
     border: none;
+    resize: none;
+    pointer-events: all;
   }
 
   .input-textbox::placeholder {
@@ -95,8 +99,12 @@
   }
 
   .input-wrapper {
-    border: 2px solid white;
+    position: relative;
+    padding: 0.4rem;
     border-radius: 5px;
+    pointer-events: none;
+    border: 2px solid white;
+    
   }
 
   .input-wrapper[id="name"],
@@ -113,17 +121,20 @@
     content: "";
     display: block;
     position: absolute;
+    top: calc(-1 * var(--border-thickness));
+    left: calc(-1 * var(--border-thickness));
+    bottom: calc(-1 * var(--border-thickness));
+    right: calc(-1 * var(--border-thickness));
+    padding: 0;
+    margin: 0;
     z-index: 1000;
-    height: 3rem;
-    width: 100%;
     border-radius: 5px;
-    border: 2px solid red;
-    box-shadow: inset 0px 0px 5px 2px white;
-    opacity: 1;
+    box-shadow: inset 0px 0px 5px 4px white;
+    opacity: 0;
     transition: opacity 400ms ease;
   }
 
-  .input-wrapper:focus::after {
+  .input-wrapper:focus-within::before {
     opacity: 1;
   }
 
