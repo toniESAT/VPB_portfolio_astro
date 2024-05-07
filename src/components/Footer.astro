@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import FooterButton from "./FooterButton.astro";
 ---
 
-<footer>
+<footer id="footer">
   <div class="flex-container">
     <div class="flex-item">
       <ul class="links">
@@ -27,18 +27,23 @@ import FooterButton from "./FooterButton.astro";
 
 <style>
   footer {
+    display:flex;
+    flex-direction: column;
+    justify-items: space-around;
     color: white;
     position: relative;
     margin: 0;
     background-color: black;
     box-shadow: 0 -2px 5px 0 grey;
+    user-select:none;    
+    height: 10rem;
   }
 
   .flex-container {
     font-size: small;
     text-transform: uppercase;
-    height: 7rem;
     display: flex;
+    height: 7rem;
     justify-content: center;
     align-items: center;
   }
@@ -82,6 +87,5 @@ import FooterButton from "./FooterButton.astro";
     text-align: center;
     padding: 1rem;
     padding-top:0;
-    
   }
 </style>

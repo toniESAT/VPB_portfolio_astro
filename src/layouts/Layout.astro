@@ -5,13 +5,12 @@ interface Props {
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions, fade } from "astro:transitions";
 
 const { title } = Astro.props;
 
 import "../styles/normalize.css";
-import "@fontsource-variable/open-sans"
-
+import "@fontsource-variable/open-sans";
 ---
 
 <!doctype html>
@@ -20,50 +19,66 @@ import "@fontsource-variable/open-sans"
 		<title>{title}</title>
 		<meta charset="UTF-8" />
 		<meta name="description" content="" />
-		<meta name="viewport" content="initial-scale=1.0, width=device-width">
-		<link
-			rel="icon"
-			type="image/svg+xml"
-			href="/favicon.svg"
-		/>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<ViewTransitions />
 	</head>
 	<body>
-		<Header transition:persist/>
-		<main transition:animate="fade">
-		<slot />
+		<Header />
+		<main id="content" transition:animate={fade({duration: "0.4s" })}>
+			<slot />
 		</main>
 		<Footer />
+		<style is:global>
+			*,
+			*:before,
+			*:after {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				scroll-behavior: smooth;
+				width: 100vw;
+				height: 100svh;
+				overflow-x: hidden;
+			}
+
+			body {
+				font-family: "Open Sans Variable";
+			}
+
+			a {
+				text-decoration: none;
+				color: inherit;
+			}
+
+			img {
+				margin: 0;
+				line-height: 0;
+			}
+		</style>
+
+		<script is:inline data-astro-rerun>
+			document.addEventListener("astro:after-swap", () => {
+				let footer_height = document.getElementById("footer").offsetHeight;
+				let header_height = document.getElementById("header").offsetHeight;
+				let main = document.getElementById("content");
+				main.style.minHeight = `calc(100vh - ${footer_height + header_height}px)`;
+
+				document.body.addEventListener("scroll", addSticky);
+			});
+
+			function addSticky() {
+				const navbar = document.getElementById("header");
+				const sticky = 80;
+
+				if (document.body.scrollTop >= sticky) {
+					navbar.classList.add("sticky");
+				} else {
+					navbar.classList.remove("sticky");
+				}
+			}
+		</script>
 	</body>
-
-	<style is:global>
-		
-
-		*,
-		*:before,
-		*:after {
-			box-sizing: border-box;
-		}
-
-		html, body {
-			scroll-behavior: smooth;
-			width:100vw;
-			height:100svh;
-			overflow-x: hidden;
-		}
-
-		body {
-			font-family: "Open Sans Variable";
-		}
-
-		a {
-			text-decoration: none;
-			color: inherit;
-		}
-
-		img {
-			margin: 0;
-			line-height: 0;
-		}
-	</style>
 </html>

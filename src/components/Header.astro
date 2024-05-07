@@ -5,13 +5,13 @@ import NavDropdown from "../components/NavDropdown.astro";
 import "@fontsource-variable/open-sans";
 ---
 
-<header id="header" transition:persist>
+<header id="header">
   <div class="logo-container">
     <a href="">
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
-  <nav id="navbar" class="nav-bar">
+  <nav id="navbar" class="nav-bar" transition:persist >
     <ul class="nav-list">
       <li><div class="spacer"></div></li>
       <NavButton href="/">HOME</NavButton>
@@ -36,7 +36,7 @@ import "@fontsource-variable/open-sans";
   </nav>
 </header>
 
-<script>
+<script is:inline data-astro-rerun>
   const buttons = Array.from(document.getElementsByClassName("nav-button"));
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -54,18 +54,7 @@ import "@fontsource-variable/open-sans";
     });
   });
 
-  function addSticky() {
-    const navbar = document.getElementById("header")!;
-    const sticky = 80;
-
-    if (document.body.scrollTop >= sticky) {
-      navbar.classList.add("sticky");
-    } else {
-      navbar.classList.remove("sticky");
-    }
-  }
-
-  document.body.addEventListener("scroll", addSticky);
+  
 </script>
 
 <style>
@@ -79,6 +68,7 @@ import "@fontsource-variable/open-sans";
     background-color: black;
     color: white;
     z-index: 1000;
+    user-select:none;    
   }
 
   .logo-container {

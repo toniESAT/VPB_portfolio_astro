@@ -4,6 +4,6 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
   site: "https://victorperezbrotons.com",
   output: "static",
-  compressHTML: false // Temporary, remove
+  compressHTML: false, // Temporary, remove
   // build: { format: "file"}
 })

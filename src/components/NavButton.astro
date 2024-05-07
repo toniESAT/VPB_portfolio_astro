@@ -11,10 +11,10 @@ import NavItem from "./NavItem.astro";
 
 <li>
   <a href={href}>
-    <div class=`nav-button ${isproject ? "project-button" : "" }` transition:persist>
+    <div class=`nav-button ${isproject ? "project-button" : "" }`>
       <NavItem>
         <slot />
-        <div class="underline" transition:persist></div>
+        <div class="underline" ></div>
       </NavItem>
     </div>
   </a>

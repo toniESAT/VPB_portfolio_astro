@@ -1,4 +1,6 @@
 ---
+import { fade } from "astro:transitions";
+
 interface Props {
   name: string;
 }
@@ -8,13 +10,13 @@ const { name: title } = Astro.props;
 import NavItem from "./NavItem.astro";
 ---
 
-<div class="dropdown" id="project-dropdown">
-  <NavItem>
+<div class="dropdown" id="project-dropdown" >
+  <NavItem >
     {title}
-    <div class="underline" transition:persist></div>
+    <div class="underline"></div>
   </NavItem>
 
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" transition:animate={fade({duration: "0.4s" })}>
     <slot />
   </ul>
 </div>
@@ -43,16 +45,30 @@ import NavItem from "./NavItem.astro";
     align-items: center;
     margin: 0;
     transform: translateY(-0.25rem);
+    pointer-events: none;
     transition:
-      opacity 150ms ease-in-out,
-      transform 150ms ease-in-out;
+      opacity 150ms ease,
+      transform 150ms ease;
+    z-index: 1000;
   }
 
+  .dropdown-menu::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2rem;
+    top: -2rem;
+    /* border:1px solid red; */
+  }
   .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within,
+  .dropdown-menu:hover::after,
   .dropdown-menu:hover {
     opacity: 1;
     transform: translateY(0);
     z-index: 1000;
+    pointer-events: all;
   }
 
   .underline {

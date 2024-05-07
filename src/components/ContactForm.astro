@@ -1,0 +1,151 @@
+---
+
+---
+
+<form class="contact-form">
+  <div class="form-group left-side">
+    <!-- <div class="name-mail"> -->
+    <div id="name" class="input-wrapper">
+      <label for="name">Name</label>
+      <input
+        class="input-textbox"
+        pattern="[a-zA-Z0-9]{8,}"
+        required
+        type="text"
+        placeholder="YOUR NAME"
+      />
+    </div>
+    <div id="email" class="input-wrapper">
+      <label for="email">Email</label>
+      <input
+        class="input-textbox"
+        pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}"
+        required
+        type="email"
+        placeholder="YOUR EMAIL"
+      />
+    </div>
+    <!-- </div> -->
+    <button>Submit</button>
+  </div>
+
+  <div class="form-group right-side">
+    <div id="text" class="input-wrapper">
+      <label for="subject"></label>
+      <textarea
+        class="input-textbosx"
+        id="subject"
+        name="subject"
+        placeholder="WHAT'S ON YOUR MIND?"
+        style="height:200px"></textarea>
+    </div>
+  </div>
+</form>
+
+<style>
+  .contact-form {
+    display: flex;
+    justify-items: space-around;
+    margin-inline: auto;
+    padding: 2rem;
+    height: 20rem;
+    width: 50%;
+    background: black;
+    border-radius: 20px;
+    box-shadow:;
+    color: white;
+    gap: 2rem;
+    box-shadow: 4px 4px 7.5px 2px grey;
+  }
+
+  .form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* width: 50%; */
+    /* flex-grow: 1; */
+    position: relative;
+  }
+
+  .left-side {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  .right-side {
+    flex-grow: 3;
+    flex-shrink: 1;
+  }
+
+  .input-textbox {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .input-textbox::placeholder {
+    white-space: pre-line;
+  }
+
+  .input-textbox:focus {
+    outline: none;
+  }
+
+  .input-wrapper {
+    border: 2px solid white;
+    border-radius: 5px;
+  }
+
+  .input-wrapper[id="name"],
+  [id="email"] {
+    height: 3rem;
+    /* width: 50%; */
+  }
+
+  .input-wrapper[id="text"] {
+    height: 100%;
+    /* width: 50%; */
+  }
+  .input-wrapper::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    height: 3rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid red;
+    box-shadow: inset 0px 0px 5px 2px white;
+    opacity: 1;
+    transition: opacity 400ms ease;
+  }
+
+  .input-wrapper:focus::after {
+    opacity: 1;
+  }
+
+  .name-mail {
+    display: flex;
+    justify-items: space-between;
+    gap: 1rem;
+  }
+
+  button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  /* Hide labels */
+  label {
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute;
+  }
+</style>

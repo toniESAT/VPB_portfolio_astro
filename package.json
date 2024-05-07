@@ -22,6 +22,5 @@
     "lorem-ipsum": "^2.0.8",
     "sharp": "^0.33.3",
     "typescript": "^5.4.5"
-  },
-  "preview": "wrangler pages dev ./dist"
+  }
 }
