@@ -21,12 +21,14 @@ import NavItem from "./NavItem.astro";
 </li>
 
 <style>
+  li {
+    flex:1;
+    flex-shrink:1;
+  }
   a {
     display: block;
     white-space: nowrap;
-  }
-
-  .nav-button {
+    flex-grow:1;
   }
 
   .underline {

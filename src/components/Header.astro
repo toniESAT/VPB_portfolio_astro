@@ -1,24 +1,24 @@
 ---
-import NavButton from "../components/NavButton.astro";
-import NavDropdown from "../components/NavDropdown.astro";
+import NavButton from "./NavButton.astro";
+import NavDropdown from "./NavDropdown.astro";
 
 import "@fontsource-variable/open-sans";
 ---
 
 <header id="header">
   <div class="logo-container">
-    <a href="">
+    <a href="/">
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
   <nav id="navbar" class="nav-bar" transition:persist >
     <ul class="nav-list">
       <li><div class="spacer"></div></li>
-      <NavButton href="/">HOME</NavButton>
       <NavButton href="/concept">CONCEPT</NavButton>
       <NavButton href="/illustration"
         >ILLUSTRATION</NavButton
       >
+      <NavButton href="/">3D</NavButton>
       <NavDropdown name="PROJECTS">
         <NavButton isproject href="/skyisdead"
           >SKY IS DEAD</NavButton

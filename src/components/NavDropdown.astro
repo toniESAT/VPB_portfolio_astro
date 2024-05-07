@@ -1,5 +1,6 @@
 ---
 import { fade } from "astro:transitions";
+import NavButton from "./NavButton.astro";
 
 interface Props {
   name: string;
@@ -10,18 +11,21 @@ const { name: title } = Astro.props;
 import NavItem from "./NavItem.astro";
 ---
 
-<div class="dropdown" id="project-dropdown" >
-  <NavItem >
+<div class="dropdown" id="project-dropdown">
+  <NavButton href="/projects">
     {title}
     <div class="underline"></div>
-  </NavItem>
+  </NavButton>
 
-  <ul class="dropdown-menu" transition:animate={fade({duration: "0.4s" })}>
+  <ul class="dropdown-menu" transition:animate={fade({ duration: "0.4s" })}>
     <slot />
   </ul>
 </div>
 
 <style>
+  :root {
+    --dropdown-gap: 0.25rem;
+  }
   .dropdown {
     position: relative;
     display: block;
@@ -44,7 +48,7 @@ import NavItem from "./NavItem.astro";
     list-style-type: none;
     align-items: center;
     margin: 0;
-    transform: translateY(-0.25rem);
+    transform: translateY(calc(-1 * var(--dropdown-gap)));
     pointer-events: none;
     transition:
       opacity 150ms ease,
@@ -57,9 +61,9 @@ import NavItem from "./NavItem.astro";
     display: block;
     position: absolute;
     width: 100%;
-    height: 2rem;
-    top: -2rem;
-    /* border:1px solid red; */
+    height: var(--dropdown-gap);
+    top: calc(-1 * var(--dropdown-gap));
+    /* border: 1px solid red; */
   }
   .dropdown:hover .dropdown-menu,
   .dropdown:focus-within,
@@ -69,20 +73,5 @@ import NavItem from "./NavItem.astro";
     transform: translateY(0);
     z-index: 1000;
     pointer-events: all;
-  }
-
-  .underline {
-    margin: 0;
-    width: 0%;
-    position: relative;
-    bottom: -5px;
-    margin-inline: auto;
-    border-bottom: 2px solid white;
-    transition: width 400ms ease;
-  }
-
-  .selected .underline,
-  .dropdown:hover .underline {
-    width: 100%;
   }
 </style>
