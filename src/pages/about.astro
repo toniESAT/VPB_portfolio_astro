@@ -7,19 +7,37 @@ import about_photo from "../assets/images/victor.png";
 
 <Layout title="About Víctor Perez">
 	<div class="about">
-		<Image
-			class="about-photo"
-			src={about_photo}
-			alt="Photo of Victor Perez Brotons"
-			widths={[240, 540, 720, about_photo.width]}
-			sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${about_photo.width}px`}
-		/>
+		<div class="photo-container">
+			<Image
+				class="about-photo"
+				src={about_photo}
+				alt="Photo of Victor Perez Brotons"
+				widths={[240, 540, 720, about_photo.width]}
+				sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${about_photo.width}px`}
+			/>
+		</div>
 	</div>
 	<ContactForm />
 </Layout>
 
 <style>
 	.about {
-		height: 50vh;
+		background-color: black;
+		border-radius: 20px;
+		margin: 2rem auto;
+		width: 80%;
+		box-shadow: 4px 4px 7.5px 2px grey;
+	}
+
+	.photo-container {
+		width: 50%;
+		height: 100%;
+	}
+
+	.about-photo {
+		display:block;
+		width: 100%;
+		height: 100%;
+		object-fit: fill;
 	}
 </style>
