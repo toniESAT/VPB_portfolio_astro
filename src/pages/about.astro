@@ -1,11 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Image from "astro/components/Image.astro";
+import about_photo from "../assets/images/victor.png";
 ---
 
 <Layout title="About Víctor Perez">
-	<div class="about"></div>
-	<ContactForm/>
+	<div class="about">
+		<Image
+			class="about-photo"
+			src={about_photo}
+			alt="Photo of Victor Perez Brotons"
+			widths={[240, 540, 720, about_photo.width]}
+			sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${about_photo.width}px`}
+		/>
+	</div>
+	<ContactForm />
 </Layout>
 
 <style>

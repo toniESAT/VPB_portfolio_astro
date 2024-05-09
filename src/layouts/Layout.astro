@@ -60,7 +60,7 @@ import "@fontsource-variable/open-sans";
 		</style>
 
 		<script is:inline data-astro-rerun>
-			document.addEventListener("astro:after-swap", () => {
+			document.addEventListener("astro:page-load", () => {
 				let footer_height = document.getElementById("footer").offsetHeight;
 				let header_height = document.getElementById("header").offsetHeight;
 				let main = document.getElementById("content");

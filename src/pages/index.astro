@@ -1,11 +1,13 @@
 ---
+import Slideshow from "../components/Slideshow.astro";
 import Layout from "../layouts/Layout.astro";
+
+const img_metadata = await Astro.glob("/src/assets/images/slideshow/*.{jpeg,jpg,png}")
+
 ---
 
 <Layout title="Víctor Pérez Brotons Art Portfolio">
-
+  <Slideshow img_metadata={img_metadata}/>
 </Layout>
 
-<style>
-
-</style>
+<style></style>

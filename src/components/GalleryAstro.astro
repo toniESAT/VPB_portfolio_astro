@@ -8,6 +8,7 @@ import {
   getImageMetadata,
   readImageMetadata,
 } from "../scripts/getImageData.ts";
+import { shuffleArray } from "../scripts/utils.ts";
 
 interface Props {
   // img_metadata: Record<string, () => Promise<{ default: ImageMetadata }>>;
@@ -19,6 +20,8 @@ const { img_metadata } = Astro.props;
 const metadata: ImageMetadata[] = img_metadata.map(
   (file: Record<string, any>) => file.default,
 );
+
+shuffleArray(metadata);
 
 const sum_height = metadata.reduce((sum, next) => {
   return sum + next.height;
