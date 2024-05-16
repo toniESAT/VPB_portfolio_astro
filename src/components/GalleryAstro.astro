@@ -1,9 +1,8 @@
 ---
 import path from "path";
 import { Image } from "astro:assets";
-// import ImageCard from "../components/ImageCard.astro";
+import Lightbox from "../components/Lightbox.astro";
 import type { ImageMetadata } from "astro";
-import { LoremIpsum } from "lorem-ipsum";
 import {
   getImageMetadata,
   readImageMetadata,
@@ -11,7 +10,6 @@ import {
 import { shuffleArray } from "../scripts/utils.ts";
 
 interface Props {
-  // img_metadata: Record<string, () => Promise<{ default: ImageMetadata }>>;
   img_metadata: Record<string, any>;
 }
 
@@ -23,31 +21,19 @@ const metadata: ImageMetadata[] = img_metadata.map(
 
 shuffleArray(metadata);
 
-const sum_height = metadata.reduce((sum, next) => {
-  return sum + next.height;
-}, 0);
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
-
 const getName = (image: ImageMetadata): string =>
   path.basename(image.src).split("?")[0];
+
+const img_margin = 16; // 1rem
+const img_margin_str = "16px"; // 1rem
 ---
 
-<div class="gallery">
+<div class="gallery" id="gallery">
   {
     metadata.map((image: ImageMetadata) => (
-      <a href={"#" + getName(image)}>
+      <a href={"#" + getName(image)} class="img-wrapper">
         <Image
-          class="pic"
+          class="gallery-img"
           src={image}
           alt=""
           widths={[240, 540, 720, image.width]}
@@ -58,112 +44,50 @@ const getName = (image: ImageMetadata): string =>
   }
 </div>
 
-<div class="lightboxes">
-  {
-    metadata.map((image: ImageMetadata) => (
-      <div class="lightbox" id={getName(image)}>
-        <div class="lightbox-content">
-          <a href="#!" class="close-button">
-            <div class="close-button-x" />
-          </a>
-          <Image
-            src={image}
-            alt=""
-            widths={[240, 540, 720, image.width]}
-            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
-          />
-          <h3>{getName(image)}</h3>
-          <p>{lorem.generateParagraphs(2)}</p>
-        </div>
-      </div>
-    ))
-  }
-</div>
+<Lightbox img_metadata={img_metadata} />
 
-<script is:inline>
-  function set_gallery_dims() {
-    const wh = window.innerHeight;
-    const ww = window.innerWidth;
+<script is:inline define:vars={{ img_margin }}>
+  function setGalleryDims() {
+    const ww = document.body.clientWidth;
 
-    let images = document.getElementsByClassName("pic");
-    
+    let images = Array.from(document.getElementsByClassName("img-wrapper"));
+    let heights = images.map((img) => img.offsetHeight + 2 * img_margin);
+    let sum_heights = heights.reduce((sum, next) => sum + next, 0);
+    let avg_height = sum_heights / heights.length;
+
+    let widths = images.map((img) => img.offsetWidth + 2 * img_margin);
+
+    let num_cols = Math.floor(ww / widths[0]);
+
+    // extra height to prevent uneven image sizes from creating an extra column
+    let gallery_height = sum_heights / num_cols + avg_height;
+
+    document.getElementById("gallery").style.height = `${gallery_height}px`;
   }
 
-  window.addEventListener("resize", set_gallery_dims);
+  window.addEventListener("resize", setGalleryDims);
+  document.addEventListener("astro:page-load", setGalleryDims);
 </script>
 
-<style>
+<style define:vars={{ img_margin_str }}>
   .gallery {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 200vh;
+    align-content: center;
   }
 
-  .gallery a {
-    margin: 0;
-    margin: 1rem;
+  .img-wrapper {
+    margin: var(--img_margin_str);
     display: block;
-    width: 30%;
+    width: 300px;
     height: fit-content;
     border: 1px solid black;
   }
-  .pic {
+  .gallery-img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     cursor: zoom-in;
-  }
-</style>
-
-<style is:global>
-  .lightbox {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: none;
-  }
-
-  .lightbox-content {
-    position: relative;
-    height: 80%;
-    width: 80%;
-    background: black;
-    color: white;
-  }
-
-  .lightbox-content img {
-    height: 100%;
-    width: auto;
-    float: left;
-    padding: 1rem;
-  }
-
-  .lightbox:target {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .close-button {
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
-    background: red;
-    top: -1rem;
-    right: -1rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .close-button-x {
-    content: url("../assets/icons/close_x.svg");
-    width: 1rem;
   }
 </style>
