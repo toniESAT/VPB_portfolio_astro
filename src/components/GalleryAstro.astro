@@ -38,7 +38,8 @@ const lorem = new LoremIpsum({
   },
 });
 
-const getName = (image: ImageMetadata) : string  => path.basename(image.src).split('?')[0];
+const getName = (image: ImageMetadata): string =>
+  path.basename(image.src).split("?")[0];
 ---
 
 <div class="gallery">
@@ -79,8 +80,19 @@ const getName = (image: ImageMetadata) : string  => path.basename(image.src).spl
   }
 </div>
 
+<script is:inline>
+  function set_gallery_dims() {
+    const wh = window.innerHeight;
+    const ww = window.innerWidth;
+
+    let images = document.getElementsByClassName("pic");
+    
+  }
+
+  window.addEventListener("resize", set_gallery_dims);
+</script>
+
 <style>
-  
   .gallery {
     display: flex;
     flex-direction: column;

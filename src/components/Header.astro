@@ -11,25 +11,17 @@ import "@fontsource-variable/open-sans";
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
-  <nav id="navbar" class="nav-bar" transition:persist >
-  <ul class="nav-list">
+  <nav id="navbar" class="nav-bar" transition:persist>
+    <ul class="nav-list">
       <li><div class="spacer"></div></li>
       <NavButton href="/concept">CONCEPT</NavButton>
-      <NavButton href="/illustration"
-        >ILLUSTRATION</NavButton
-      >
+      <NavButton href="/illustration">ILLUSTRATION</NavButton>
       <NavButton href="/3d">3D</NavButton>
       <NavButton href="/comics">COMIC</NavButton>
       <NavDropdown name="PROJECTS">
-        <NavButton isproject href="/skyisdead"
-          >SKY IS DEAD</NavButton
-        >
-        <NavButton isproject href="/etherna"
-          >ETHERNA</NavButton
-        >
-        <NavButton isproject href="/animals"
-          >ANIMALS A-Z</NavButton
-        >
+        <NavButton isproject href="/skyisdead">SKY IS DEAD</NavButton>
+        <NavButton isproject href="/etherna">ETHERNA</NavButton>
+        <NavButton isproject href="/animals">ANIMALS A-Z</NavButton>
       </NavDropdown>
       <NavButton href="/about">ABOUT ME</NavButton>
       <li><div class="spacer"></div></li>
@@ -37,25 +29,23 @@ import "@fontsource-variable/open-sans";
   </nav>
 </header>
 
-<script is:inline data-astro-rerun>
-  const buttons = Array.from(document.getElementsByClassName("nav-button"));
-  buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      buttons.forEach((button) => {
-        if (e.currentTarget == button) {
-          const dropdown = document.getElementById("project-dropdown");
-          if (button.classList.contains("project-button")) {
-            dropdown?.classList.add("selected")
+<script is:inline>
+  let buttons = Array.from(document.getElementsByClassName("nav-button"));
+  buttons.forEach((button_outer) => {
+    button_outer.addEventListener("click", (e) => {
+      buttons.forEach((button_inner) => {
+        if (e.currentTarget == button_inner) {
+          let dropdown = document.getElementById("project-dropdown");
+          if (button_inner.classList.contains("project-button")) {
+            dropdown?.classList.add("selected");
           } else {
-            dropdown?.classList.remove("selected")
+            dropdown?.classList.remove("selected");
           }
-          button.classList.add("selected");
-        } else button.classList.remove("selected");
+          button_inner.classList.add("selected");
+        } else button_inner.classList.remove("selected");
       });
     });
   });
-
-  
 </script>
 
 <style>
@@ -69,7 +59,7 @@ import "@fontsource-variable/open-sans";
     background-color: black;
     color: white;
     z-index: 1000;
-    user-select:none;    
+    user-select: none;
   }
 
   .logo-container {

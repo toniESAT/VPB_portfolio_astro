@@ -12,6 +12,11 @@ const { img_metadata } = Astro.props;
 const metadata: ImageMetadata[] = img_metadata.map(
   (file: Record<string, any>) => file.default,
 );
+
+const num_images = metadata.length;
+const seconds_per_slide = 3;
+const slideshow_duration = (seconds_per_slide * num_images).toString() + "s";
+const slideshow_perc = (100.0 / num_images).toString() + "%";
 ---
 
 <div class="slideshow" id="slideshow">
@@ -24,14 +29,14 @@ const metadata: ImageMetadata[] = img_metadata.map(
           alt=""
           widths={[240, 540, 720, image.width]}
           sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
-          style={`animation-delay: ${6 * index}s;`}
+          style={`animation-delay: ${seconds_per_slide * index}s;`}
         />
       </a>
     ))
   }
 </div>
 
-<style>
+<style define:vars={{ slideshow_duration, slideshow_perc }}>
   .slideshow {
     background: black;
     position: relative;
@@ -46,34 +51,38 @@ const metadata: ImageMetadata[] = img_metadata.map(
     align-items: center;
     position: absolute;
     top: 0;
+    width: 100vw;
+    height: 100%;
   }
 
   .landing-img {
+    display: block;
     background: black;
-    /* position: absolute; */
-    /* top: 0; */
-    /* left: 0; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
     opacity: 0;
-    transform: scale(1.4) translate(10%, 10%);
-    animation: animate 20s infinite;
+    transform: scale(1.1);
+    animation: animate var(--slideshow_duration) infinite;
   }
 
   @keyframes animate {
-    25% {
+    0% {
       opacity: 1;
       transform: scale(1);
     }
-    50% {
+    var(--slideshow_perc) {
       opacity: 0;
     }
   }
 </style>
 
-<script is:inline data-astro-rerun>
-  document.addEventListener("astro:page-load", () => {
+<script is:inline>
+  document.addEventListener("astro:after-swap", () => {
     let slideshow = document.getElementById("slideshow");
     let header_height = document.getElementById("header").offsetHeight;
 
-    slideshow.style.height = `calc(100vh - ${header_height}px)`;
+    if (slideshow) slideshow.style.height = `calc(100vh - ${header_height}px)`;
   });
 </script>

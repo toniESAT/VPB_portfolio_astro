@@ -54,7 +54,8 @@
     margin-bottom: 2rem;
     padding: 2rem;
     height: 20rem;
-    width: 50%;
+    max-width: 60%;
+    min-width: 30rem;
     background: black;
     border-radius: 20px;
     color: white;
@@ -163,4 +164,10 @@
     clip: rect(1px, 1px, 1px, 1px);
     position: absolute;
   }
+
+  @media (max-width: 1024px) {
+		.about {
+			flex-direction: column-reverse;
+		}
+	}
 </style>

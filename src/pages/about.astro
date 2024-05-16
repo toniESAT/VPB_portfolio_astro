@@ -7,14 +7,32 @@ import about_photo from "../assets/images/victor.png";
 
 <Layout title="About Víctor Perez">
 	<div class="about">
-		<div class="photo-container">
+		<div class="about-photo">
 			<Image
-				class="about-photo"
+				id="img"
 				src={about_photo}
 				alt="Photo of Victor Perez Brotons"
 				widths={[240, 540, 720, about_photo.width]}
 				sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${about_photo.width}px`}
 			/>
+		</div>
+		<div class="about-text">
+			<p>
+				My name is Víctor, I’m a concept artist and illustrator born in Spain. I
+				recently graduated from the Universitat Politècnica de València with a
+				degree in Fine Arts.
+			</p>
+			<p>
+				My work is heavily inspired by fantasy, driven by my passion for
+				videogames witch guided me to pursue a career in concept art, focusing
+				on character and environment design.
+			</p>
+			<p>
+				During my studies, I created an artbook for a hypothetical video game,
+				drawing influences from titles like Monster Hunter, Dark Souls, and Ori.
+				This project showcased my skills in character, weapon, creature, and
+				environment design.
+			</p>
 		</div>
 	</div>
 	<ContactForm />
@@ -22,22 +40,51 @@ import about_photo from "../assets/images/victor.png";
 
 <style>
 	.about {
+		display: flex;
 		background-color: black;
+		color: white;
 		border-radius: 20px;
 		margin: 2rem auto;
 		width: 80%;
 		box-shadow: 4px 4px 7.5px 2px grey;
+		height: auto;
 	}
 
-	.photo-container {
-		width: 50%;
-		height: 100%;
+	.about > * {
+		flex-basis: 1;
+		flex-grow: 1;
 	}
 
 	.about-photo {
-		display:block;
-		width: 100%;
-		height: 100%;
-		object-fit: fill;
+		flex-shrink: 2;
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: center;
+	}
+
+	.about-photo #img {
+		display: block;
+		max-width: 400px;
+		max-height: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	.about-text {
+		text-align: justify;
+		flex-shrink: 3;
+		padding: 2rem;
+		font-size: 1.1rem;
+	}
+
+	@media (max-width: 1024px) {
+		.about {
+			flex-direction: column-reverse;
+		}
+		.about-photo #img {
+			margin-top: -50px;
+			width: 100%;
+		}
 	}
 </style>
