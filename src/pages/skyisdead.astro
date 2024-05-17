@@ -15,29 +15,26 @@ const img_classname = "character-card";
 ---
 
 <Layout title="Víctor Pérez Brotons Art Portfolio">
-  <div id="gallery-wrapper">
-    <div class="card-container">
-      {
-        metadata.map((image: ImageMetadata) => (
-          <CharacerCard img={image} width={card_width} />
-        ))
-      }
-    </div>
+  <div class="card-container">
+    {
+      metadata.map((image: ImageMetadata) => (
+        <CharacerCard img={image} width={card_width} />
+      ))
+    }
   </div>
 </Layout>
 
-<style>
-  #gallery-wrapper {
+<style is:global>
+  /* Apply background to main so that it covers the entire page */
+  #content {
+    background-color: black;
     background-image: url("../assets/images/backgrounds/brickwall1.jpeg");
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: top 0;
-    width: 100%;
-    height: max-content;
-    margin: 0;
-    padding: 5rem 2rem;
-    overflow:hidden;
   }
+</style>
 
+<style>
   .card-container {
     position: relative;
     display: flex;
@@ -47,5 +44,15 @@ const img_classname = "character-card";
     height: 100%;
     width: 100%;
     gap: 2rem;
+    padding: 10rem 5rem;
   }
 </style>
+
+<!-- <script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    let slideshow = document.getElementById("gallery-wrapper");
+    let header_height = document.getElementById("header").offsetHeight;
+
+    if (slideshow) slideshow.style.height = `calc(100vh - ${header_height}px)`;
+  });
+</script> -->

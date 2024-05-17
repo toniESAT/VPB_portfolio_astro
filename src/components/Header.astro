@@ -18,10 +18,10 @@ import "@fontsource-variable/open-sans";
       <NavButton href="/3d">3D</NavButton>
       <div class="break"></div>
       <NavDropdown name="PROJECTS">
-        <NavButton isproject href="/skyisdead">SKY IS DEAD</NavButton>
-        <NavButton isproject href="/etherna">ETHERNA</NavButton>
-        <NavButton isproject href="/animalsaz">ANIMALS A-Z</NavButton>
-        <NavButton isproject href="/comics">COMIC</NavButton>
+        <NavButton isproject={true} href="/skyisdead">SKY IS DEAD</NavButton>
+        <NavButton isproject={true} href="/etherna">ETHERNA</NavButton>
+        <NavButton isproject={true} href="/animalsaz">ANIMALS A-Z</NavButton>
+        <NavButton isproject={true} href="/comics">COMIC</NavButton>
       </NavDropdown>
       <NavButton href="/about">ABOUT ME</NavButton>
     </ul>
@@ -29,19 +29,19 @@ import "@fontsource-variable/open-sans";
 </header>
 
 <script is:inline>
-  let buttons = Array.from(document.getElementsByClassName("nav-button"));
+  let buttons = Array.from(document.getElementsByClassName("nav-item"));
   buttons.forEach((button_outer) => {
     button_outer.addEventListener("click", (e) => {
       buttons.forEach((button_inner) => {
         if (e.currentTarget == button_inner) {
-          let dropdown = document.getElementById("project-dropdown");
+          let dropdown_item = document.getElementById("project-dropdown").firstElementChild;
           if (button_inner.classList.contains("project-button")) {
-            dropdown?.classList.add("selected");
+            dropdown_item.classList.add("selected");
           } else {
-            dropdown?.classList.remove("selected");
+            dropdown_item.classList.remove("selected");
           }
           button_inner.classList.add("selected");
-        } else button_inner.classList.remove("selected");
+        } else button_inner.classList.remove("selected");       
       });
     });
   });

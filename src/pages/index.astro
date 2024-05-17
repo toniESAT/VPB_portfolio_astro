@@ -17,3 +17,12 @@ const img_metadata = await Astro.glob(
     background: black;
   }
 </style>
+
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    let slideshow = document.getElementById("slideshow");
+    let header_height = document.getElementById("header").offsetHeight;
+
+    if (slideshow) slideshow.style.height = `calc(100vh - ${header_height}px)`;
+  });
+</script>

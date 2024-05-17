@@ -11,40 +11,18 @@ import NavItem from "./NavItem.astro";
 
 <li>
   <a href={href}>
-    <div class=`nav-button ${isproject ? "project-button" : "" }`>
-      <NavItem>
+    <div class="nav-button">
+      <NavItem isproject = {isproject}>
         <slot />
-        <div class="underline" ></div>
       </NavItem>
     </div>
   </a>
 </li>
 
 <style>
-
   a {
     display: block;
     white-space: nowrap;
-    flex-grow:1;  
-
-
-  }
-
-  .underline {
-    margin: 0;
-    width: 0%;
-    position: relative;
-    bottom: -5px;
-    margin-inline: auto;
-    border-bottom: 2px solid white;
-    transition: width 400ms ease;
-  }
-
-  .nav-button:hover .underline {
-    width: 100%;
-  }
-
-  .selected .underline {
-    width: 100%;
+    flex-grow: 1;
   }
 </style>

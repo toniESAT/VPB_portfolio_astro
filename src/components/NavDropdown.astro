@@ -12,10 +12,9 @@ import NavItem from "./NavItem.astro";
 ---
 
 <div class="dropdown" id="project-dropdown">
-  <NavButton href="/projects">
+  <NavItem>
     {title}
-    <div class="underline"></div>
-  </NavButton>
+  </NavItem>
 
   <ul class="dropdown-menu" transition:animate={fade({ duration: "0.4s" })}>
     <slot />
@@ -74,4 +73,6 @@ import NavItem from "./NavItem.astro";
     z-index: 1000;
     pointer-events: all;
   }
+
+  
 </style>

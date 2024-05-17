@@ -30,13 +30,6 @@ import "@fontsource-variable/open-sans";
 		</main>
 		<Footer />
 
-		<style>
-			main {
-				position: relative;
-				width: 100%;
-			}
-		</style>
-
 		<style is:global>
 			*,
 			*::before,
@@ -69,14 +62,18 @@ import "@fontsource-variable/open-sans";
 		</style>
 
 		<script is:inline>
-			document.addEventListener("astro:page-load", () => {
+			function expand_content() {
 				let footer_height = document.getElementById("footer").offsetHeight;
 				let header_height = document.getElementById("header").offsetHeight;
 				let main = document.getElementById("content");
 				main.style.minHeight = `calc(100vh - ${footer_height + header_height}px)`;
 
 				document.body.addEventListener("scroll", addSticky);
-			});
+			}
+
+			document.addEventListener("astro:page-load", expand_content);
+			document.addEventListener("resize", expand_content);
+			// document.addEventListener("scroll", expand_content);
 
 			function addSticky() {
 				const navbar = document.getElementById("header");

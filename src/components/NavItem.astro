@@ -1,9 +1,14 @@
 ---
+interface Props {
+  isproject?: boolean;
+}
 
+const { isproject = false } = Astro.props;
 ---
 
-<div class="nav-item" >
+<div class=`nav-item ${isproject ? "project-button" : "" }`>
   <slot />
+  <div class="underline"></div>
 </div>
 
 <style>
@@ -15,6 +20,23 @@
     text-align: center;
     font-weight: 500;
     min-width: 5rem;
-  } 
+  }
 
+  .underline {
+    margin: 0;
+    width: 0%;
+    position: relative;
+    bottom: -5px;
+    margin-inline: auto;
+    border-bottom: 2px solid white;
+    transition: width 400ms ease;
+  }
+
+  .nav-item:hover .underline {
+    width: 100%;
+  }
+
+  .selected .underline {
+    width: 100%;
+  }
 </style>
