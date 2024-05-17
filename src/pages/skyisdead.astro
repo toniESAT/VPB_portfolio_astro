@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CharacerCard from "../components/CharacerCard.astro";
+
+const img_metadata = await Astro.glob(
+  "/src/assets/images/SkyIsDead/characters/*.{jpeg,jpg,png}",
+);
+
+const metadata: ImageMetadata[] = img_metadata.map(
+  (file: Record<string, any>) => file.default,
+);
+
+const card_width = (100 / metadata.length).toString() + "%";
+const img_classname = "character-card";
+---
+
+<Layout title="Víctor Pérez Brotons Art Portfolio">
+  <div id="gallery-wrapper">
+    <div class="card-container">
+      {
+        metadata.map((image: ImageMetadata) => (
+          <CharacerCard img={image} width={card_width} />
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #gallery-wrapper {
+    background-image: url("../assets/images/backgrounds/brickwall1.jpeg");
+    background-size: cover;
+    background-position: top 0;
+    width: 100%;
+    height: max-content;
+    margin: 0;
+    padding: 5rem 2rem;
+    overflow:hidden;
+  }
+
+  .card-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 2rem;
+  }
+</style>

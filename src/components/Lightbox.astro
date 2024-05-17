@@ -66,6 +66,7 @@ const getName = (image: ImageMetadata): string =>
     position: fixed;
     z-index: 1000;
     top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
@@ -73,6 +74,7 @@ const getName = (image: ImageMetadata): string =>
     opacity: 0;
     transition: opacity 500ms ease;
   }
+
   .lightbox:target {
     display: flex;
     justify-content: center;
@@ -85,8 +87,8 @@ const getName = (image: ImageMetadata): string =>
     display: flex;
     gap: 2rem;
     position: relative;
-    height: 80%;
-    width: 80%;
+    height: 70%;
+    width: 70%;
     background: black;
     color: white;
     padding: 2rem;

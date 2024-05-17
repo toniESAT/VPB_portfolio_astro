@@ -25,10 +25,18 @@ import "@fontsource-variable/open-sans";
 	</head>
 	<body>
 		<Header />
-		<main id="content" transition:animate={fade({duration: "0.4s" })}>
+		<main id="content" transition:animate={fade({ duration: "0.4s" })}>
 			<slot />
 		</main>
 		<Footer />
+
+		<style>
+			main {
+				position: relative;
+				width: 100%;
+			}
+		</style>
+
 		<style is:global>
 			*,
 			*::before,
@@ -42,6 +50,7 @@ import "@fontsource-variable/open-sans";
 				width: 100vw;
 				height: 100svh;
 				overflow-x: hidden;
+				overflow-y: scroll;
 			}
 
 			body {

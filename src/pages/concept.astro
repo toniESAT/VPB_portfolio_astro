@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import GalleryAstro from "../components/GalleryAstro.astro";
+import Gallery from "../components/Gallery.astro";
 
 const img_metadata = await Astro.glob(
 	"/src/assets/images/concept/*.{jpeg,jpg,png}",
@@ -8,7 +8,5 @@ const img_metadata = await Astro.glob(
 ---
 
 <Layout title="Concept Art by Víctor Pérez Brotons">
-	<GalleryAstro img_metadata={img_metadata} />
+	<Gallery img_metadata={img_metadata} />
 </Layout>
-
-<style></style>

@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Gallery from "../components/Gallery.astro";
+
+const img_metadata = await Astro.glob(
+  "/src/assets/images/Etherna/*.{jpeg,jpg,png}",
+);
+---
+
+<Layout title="Etherna by Víctor Pérez Brotons">
+  <div id="gallery-background"></div>
+  <div id="gallery-wrapper">
+    <Gallery img_metadata={img_metadata} />
+  </div>
+</Layout>
+
+<style>
+  #gallery-wrapper {
+    position: relative;
+    padding-top: 4rem;
+  }
+
+  #gallery-background {
+    background-image: url("../assets/images/backgrounds/background_etherna_combined.png");
+    background-size: 100% 100%;
+    /* background-attachment: fixed; */
+    position: fixed;
+    top: 80;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1000;
+  }
+</style>
+
+<!-- <script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    document.body.addEventListener("scroll", () => {
+      let header = document.getElementById("header");
+      let header_height = header.style.top - header.offsetHeight;
+      let main = document.getElementById("gallery-background");
+      main.style.top = `${header_height}px`;
+    });
+  });
+</script> -->

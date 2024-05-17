@@ -13,18 +13,17 @@ import "@fontsource-variable/open-sans";
   </div>
   <nav id="navbar" class="nav-bar" transition:persist>
     <ul class="nav-list">
-      <li><div class="spacer"></div></li>
       <NavButton href="/concept">CONCEPT</NavButton>
       <NavButton href="/illustration">ILLUSTRATION</NavButton>
       <NavButton href="/3d">3D</NavButton>
-      <NavButton href="/comics">COMIC</NavButton>
+      <div class="break"></div>
       <NavDropdown name="PROJECTS">
         <NavButton isproject href="/skyisdead">SKY IS DEAD</NavButton>
         <NavButton isproject href="/etherna">ETHERNA</NavButton>
-        <NavButton isproject href="/animals">ANIMALS A-Z</NavButton>
+        <NavButton isproject href="/animalsaz">ANIMALS A-Z</NavButton>
+        <NavButton isproject href="/comics">COMIC</NavButton>
       </NavDropdown>
       <NavButton href="/about">ABOUT ME</NavButton>
-      <li><div class="spacer"></div></li>
     </ul>
   </nav>
 </header>
@@ -54,17 +53,24 @@ import "@fontsource-variable/open-sans";
   }
 
   header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin: 0;
-    display: block;
     background-color: black;
     color: white;
     z-index: 1000;
     user-select: none;
+    box-shadow:
+      5px 5px 5px -5px black,
+      -5px 5px 5px -5px black;
   }
 
   .logo-container {
     display: flex;
     height: var(--logo-height);
+    padding: 0 4rem;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -75,33 +81,61 @@ import "@fontsource-variable/open-sans";
   .logo {
     font-size: 2rem;
     font-weight: 600;
+    width: max-content;
   }
 
   .nav-bar {
     background-color: black;
-    box-shadow:
-      5px 5px 5px -5px black,
-      -5px 5px 5px -5px black;
     z-index: 40;
+    padding: 0 4rem;
   }
 
   .nav-list {
-    height: auto;
     display: flex;
-    /* flex-wrap: wrap; */
     list-style-type: none;
     justify-content: space-around;
     align-items: center;
     margin: 0;
+    padding: 0;
   }
 
-  .spacer {
-    flex-shrink: 2;
+  .nav-list > * {
+    flex-basis: 100%;
   }
-
   .sticky {
     position: sticky;
     top: calc(-1 * var(--logo-height));
     width: 100%;
+  }
+
+  @media (max-width: 576px) {
+    .nav-bar {
+      padding: 0;
+    }
+    .nav-list {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .break {
+      flex-basis: 100%;
+      height: 0;
+    }
+    .logo {
+      font-size: min(2rem, 7.5vw);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    header {
+      flex-direction: row;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+    }
+    .sticky {
+      position: sticky;
+      top: 0;
+    }
   }
 </style>

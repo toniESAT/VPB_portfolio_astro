@@ -1,13 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import GalleryAstro from "../components/GalleryAstro.astro";
+import GalleryAstro from "../components/Gallery.astro";
 
 // const img_metadata = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/DnD/*.{jpeg,jpg,png}");
-const img_metadata = await Astro.glob("/src/assets/images/concept/*.{jpeg,jpg,png}")
+const img_metadata = await Astro.glob(
+	"/src/assets/images/concept/*.{jpeg,jpg,png}",
+);
 ---
 
 <Layout title="Comics by Víctor Pérez Brotons">
-				<GalleryAstro img_metadata={img_metadata} />
+	<GalleryAstro img_metadata={img_metadata} />
 </Layout>
 
 <style></style>
