@@ -11,6 +11,7 @@ import "@fontsource-variable/open-sans";
       <div class="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
+  <div class="spacer"></div>
   <nav id="navbar" class="nav-bar" transition:persist>
     <ul class="nav-list">
       <NavButton title="CONCEPT" href="/concept" />
@@ -48,16 +49,9 @@ import "@fontsource-variable/open-sans";
   });
 </script>
 
-<!-- <style is:global>
-  .nav-list > * {
-    flex: 1;
-    min-width: fit-content;
-  }
-</style> -->
-
 <style>
   :root {
-    --logo-height: 5rem;
+    --logo-height: 4rem;
   }
 
   header {
@@ -73,20 +67,27 @@ import "@fontsource-variable/open-sans";
     box-shadow:
       5px 5px 5px -5px black,
       -5px 5px 5px -5px black;
+
+    padding: 0 3rem;
   }
 
   .logo-container {
     display: flex;
     height: var(--logo-height);
-    padding: 0 4rem;
     text-align: center;
     justify-content: center;
     align-items: center;
     background-color: black;
     z-index: 50;
+    max-height: 10vh;
+  }
+
+  .spacer {
+    flex-basis: 100%;
   }
 
   .logo {
+    padding: 10px 0;
     font-size: 2rem;
     font-weight: 600;
     width: max-content;
@@ -95,16 +96,20 @@ import "@fontsource-variable/open-sans";
   .nav-bar {
     background-color: black;
     z-index: 40;
-    padding: 0 4rem;
+    height: 100%;
+    width: 100%;
+    font-size: 1em;
   }
 
   .nav-list {
     display: flex;
+    background-color: black;
     list-style-type: none;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
+    flex-wrap: nowrap;
   }
 
   .sticky {
@@ -127,7 +132,11 @@ import "@fontsource-variable/open-sans";
       height: 0;
     }
     .logo {
-      font-size: min(2rem, 7.5vw);
+      font-size: min(2rem, max(6vw, 10pt));
+    }
+
+    .nav-list {
+      font-size: min(1rem, max(6vw, 9pt));
     }
   }
 
@@ -142,5 +151,8 @@ import "@fontsource-variable/open-sans";
       position: sticky;
       top: 0;
     }
-  }
+    .nav-list {
+    justify-content: flex-end;
+
+}
 </style>
