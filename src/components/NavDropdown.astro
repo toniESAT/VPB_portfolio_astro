@@ -1,37 +1,33 @@
 ---
 import { fade } from "astro:transitions";
-import NavButton from "./NavButton.astro";
 
 interface Props {
-  name: string;
+  title: string;
 }
 
-const { name: title } = Astro.props;
+const { title } = Astro.props;
 
 import NavItem from "./NavItem.astro";
 ---
 
-<div class="dropdown" id="project-dropdown">
-  <NavItem>
-    {title}
-  </NavItem>
-
+<li class="dropdown" id="project-dropdown">
+  <NavItem title={title} />
   <ul class="dropdown-menu" transition:animate={fade({ duration: "0.4s" })}>
     <slot />
   </ul>
-</div>
+</li>
 
 <style>
   :root {
     --dropdown-gap: 0.25rem;
   }
+
+  
   .dropdown {
     position: relative;
     display: block;
     white-space: nowrap;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    user-select: none;
   }
 
   .dropdown-menu {
@@ -39,7 +35,7 @@ import NavItem from "./NavItem.astro";
     left: -25%;
     top: calc(100% + 0.25rem);
     background-color: black;
-    box-shadow: 2px 2px 5px 0 grey;
+    box-shadow: 2px 2px 5px 0 black;
     padding: 0.75rem;
     opacity: 0;
     display: flex;
@@ -62,8 +58,8 @@ import NavItem from "./NavItem.astro";
     width: 100%;
     height: var(--dropdown-gap);
     top: calc(-1 * var(--dropdown-gap));
-    /* border: 1px solid red; */
   }
+
   .dropdown:hover .dropdown-menu,
   .dropdown:focus-within,
   .dropdown-menu:hover::after,
@@ -73,6 +69,4 @@ import NavItem from "./NavItem.astro";
     z-index: 1000;
     pointer-events: all;
   }
-
-  
 </style>

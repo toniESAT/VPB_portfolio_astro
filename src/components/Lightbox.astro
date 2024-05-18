@@ -18,16 +18,19 @@ const metadata: ImageMetadata[] = img_metadata.map(
   (file: Record<string, any>) => file.default,
 );
 
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
+const lorem = new LoremIpsum(
+  {
+    sentencesPerParagraph: {
+      max: 8,
+      min: 4,
+    },
+    wordsPerSentence: {
+      max: 16,
+      min: 4,
+    },
   },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
+  "html",
+);
 
 const getName = (image: ImageMetadata): string =>
   path.basename(image.src).split("?")[0];
@@ -37,6 +40,7 @@ const getName = (image: ImageMetadata): string =>
   {
     metadata.map((image: ImageMetadata) => (
       <div class="lightbox" id={getName(image)}>
+        <a class="background-link" href="#!" />
         <div class="lightbox-content">
           <a href="#!" class="close-button">
             <div class="close-button-x" />
@@ -50,9 +54,9 @@ const getName = (image: ImageMetadata): string =>
               sizes={`(max-width: 360px) 360px, (max-width: 720px) 720px, (max-width: 1600px) 1200px, ${image.width}px`}
             />
           </a>
-          <div class="lightbox-text">
-            <h3>{getName(image)}</h3>
-            <p>{lorem.generateParagraphs(2)}</p>
+          <div class="lightbox-text-wrapper">
+            <h3 class="lightbox-title">{getName(image)}</h3>
+            <div class="lightbox-text" set:html={lorem.generateParagraphs(2)} />
           </div>
         </div>
       </div>
@@ -60,27 +64,35 @@ const getName = (image: ImageMetadata): string =>
   }
 </div>
 
-<style is:global>
+<style>
   .lightbox {
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    z-index: 1000;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.75);
-    visibility: hidden;
+    pointer-events: none;
     opacity: 0;
     transition: opacity 500ms ease;
   }
 
   .lightbox:target {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: visible;
     opacity: 1;
+    pointer-events: all;
+  }
+
+  .lightbox .background-link {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -10;
   }
 
   .lightbox-content {
@@ -98,22 +110,32 @@ const getName = (image: ImageMetadata): string =>
     padding: 0;
     margin: 0;
   }
-  .lightbox-text {
+
+  .lightbox-text-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 40%;
     text-align: justify;
+    flex-shrink: 1;
+  }
+
+  .lightbox-text-wrapper {
+    overflow-y: scroll;
   }
 
   .lightbox-img-wrapper {
-    width: 60%;
+    display: flex;
+    /* height: fit-content; */
+    max-height: 100%;
+    flex-shrink: 1;
+
+    /* width: 300px; */
   }
 
   .lightbox-img {
     display: block;
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
   }
 

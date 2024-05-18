@@ -21,21 +21,32 @@ const metadata: ImageMetadata[] = img_metadata.map(
 
 shuffleArray(metadata);
 
+const image_spans = metadata.map((image) =>
+  image.width / image.height > 1.5 ? 2 : 1,
+);
+
 const getName = (image: ImageMetadata): string =>
   path.basename(image.src).split("?")[0];
 
+const image_width = 400;
+const image_width_str = image_width.toString() + "px";
 const img_margin = 16; // 1rem
-const img_margin_str = "16px"; // 1rem
+const img_margin_str = img_margin.toString() + "px";
 ---
 
 <div class="gallery" id="gallery">
   {
-    metadata.map((image: ImageMetadata) => (
-      <a href={"#" + getName(image)} class="img-wrapper">
+    metadata.map((image: ImageMetadata, idx: number) => (
+      <a
+        href={"#" + getName(image)}
+        class="img-wrapper"
+        style={"grid-column-end: span " + image_spans[idx].toString()}
+      >
         <Image
           class="gallery-img"
           src={image}
           alt=""
+          width={image_width}
           widths={[240, 540, 720, image.width]}
           sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
         />
@@ -46,11 +57,48 @@ const img_margin_str = "16px"; // 1rem
 
 <Lightbox img_metadata={img_metadata} />
 
-<script is:inline define:vars={{ img_margin }}>
+<style define:vars={{ img_margin_str, image_width_str }}>
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 2rem max(10px, 2vw);
+    gap: calc(var(--img_margin_str) * 2);
+  }
+
+  .gallery-img {
+    display: block;
+    line-height: 0;
+    object-fit: cover;
+    height: 100%;
+    cursor: zoom-in;
+    border-radius: 6px;
+  }
+
+  @supports (grid-template-rows: masonry) {
+    .gallery {
+      display: grid;
+      grid-template-rows: masonry;
+      grid-template-columns: repeat(auto-fill, var(--image_width_str));
+      align-content: baseline;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ img_margin, image_width, image_spans }}>
+  let gallery_style = window.getComputedStyle(
+    document.getElementById("gallery"),
+  );
+
+  let isgrid = gallery_style.display == "grid";
+
   function setGalleryDims() {
+    // const ww = gallery_style.width;
     const ww = document.body.clientWidth;
 
-    const images = Array.from(document.getElementsByClassName("img-wrapper"));
+    const images = Array.from(document.getElementsByClassName("gallery-img"));
     const heights = images.map((img) => img.offsetHeight + 2 * img_margin);
     const sum_heights = heights.reduce((sum, next) => sum + next, 0);
     const avg_height = sum_heights / heights.length;
@@ -62,32 +110,18 @@ const img_margin_str = "16px"; // 1rem
 
     const gallery = document.getElementById("gallery");
     if (gallery) gallery.style.height = `${gallery_height}px`;
+
+    if (isgrid) {
+      images.forEach((img, idx) => {
+        img.style.width =
+          (image_spans[idx] * image_width +
+          (image_spans[idx] - 1) * img_margin * 2).toString()+"px";
+      });
+    }
+    
   }
 
   setGalleryDims();
   window.addEventListener("resize", setGalleryDims);
   document.addEventListener("astro:page-load", setGalleryDims);
 </script>
-
-<style define:vars={{ img_margin_str }}>
-  .gallery {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-  }
-
-  .img-wrapper {
-    margin: var(--img_margin_str);
-    display: block;
-    width: 300px;
-    height: fit-content;
-    border: 1px solid black;
-  }
-  .gallery-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    cursor: zoom-in;
-  }
-</style>

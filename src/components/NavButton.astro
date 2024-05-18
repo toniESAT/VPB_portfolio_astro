@@ -1,21 +1,18 @@
 ---
 interface Props {
+  title: string;
   href: string;
   isproject?: boolean;
 }
 
-const { href, isproject = false } = Astro.props;
+const { title, href, isproject = false } = Astro.props;
 
 import NavItem from "./NavItem.astro";
 ---
 
 <li>
-  <a href={href}>
-    <div class="nav-button">
-      <NavItem isproject = {isproject}>
-        <slot />
-      </NavItem>
-    </div>
+  <a href={href} class="nav-button">
+    <NavItem title={title} isproject={isproject} />
   </a>
 </li>
 
@@ -23,6 +20,6 @@ import NavItem from "./NavItem.astro";
   a {
     display: block;
     white-space: nowrap;
-    flex-grow: 1;
   }
+
 </style>

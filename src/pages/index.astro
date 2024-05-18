@@ -19,10 +19,13 @@ const img_metadata = await Astro.glob(
 </style>
 
 <script is:inline>
-  document.addEventListener("astro:page-load", () => {
+  function expand_content() {
     let slideshow = document.getElementById("slideshow");
     let header_height = document.getElementById("header").offsetHeight;
 
     if (slideshow) slideshow.style.height = `calc(100vh - ${header_height}px)`;
-  });
+  }
+  
+  expand_content();
+  document.addEventListener("astro:page-load", expand_content);
 </script>

@@ -13,17 +13,17 @@ import "@fontsource-variable/open-sans";
   </div>
   <nav id="navbar" class="nav-bar" transition:persist>
     <ul class="nav-list">
-      <NavButton href="/concept">CONCEPT</NavButton>
-      <NavButton href="/illustration">ILLUSTRATION</NavButton>
-      <NavButton href="/3d">3D</NavButton>
+      <NavButton title="CONCEPT" href="/concept" />
+      <NavButton title="ILLUSTRATION" href="/illustration" />
+      <NavButton title="3D" href="/3d" />
       <div class="break"></div>
-      <NavDropdown name="PROJECTS">
-        <NavButton isproject={true} href="/skyisdead">SKY IS DEAD</NavButton>
-        <NavButton isproject={true} href="/etherna">ETHERNA</NavButton>
-        <NavButton isproject={true} href="/animalsaz">ANIMALS A-Z</NavButton>
-        <NavButton isproject={true} href="/comics">COMIC</NavButton>
+      <NavDropdown title="PROJECTS">
+        <NavButton title="SKY IS DEAD" isproject={true} href="/skyisdead" />
+        <NavButton title="ETHERNA" isproject={true} href="/etherna" />
+        <NavButton title="ANIMALS A-Z" isproject={true} href="/animalsaz" />
+        <NavButton title="COMIC" isproject={true} href="/comics" />
       </NavDropdown>
-      <NavButton href="/about">ABOUT ME</NavButton>
+      <NavButton title="ABOUT ME" href="/about" />
     </ul>
   </nav>
 </header>
@@ -34,18 +34,26 @@ import "@fontsource-variable/open-sans";
     button_outer.addEventListener("click", (e) => {
       buttons.forEach((button_inner) => {
         if (e.currentTarget == button_inner) {
-          let dropdown_item = document.getElementById("project-dropdown").firstElementChild;
+          let dropdown_item =
+            document.getElementById("project-dropdown").firstElementChild;
           if (button_inner.classList.contains("project-button")) {
             dropdown_item.classList.add("selected");
           } else {
             dropdown_item.classList.remove("selected");
           }
           button_inner.classList.add("selected");
-        } else button_inner.classList.remove("selected");       
+        } else button_inner.classList.remove("selected");
       });
     });
   });
 </script>
+
+<!-- <style is:global>
+  .nav-list > * {
+    flex: 1;
+    min-width: fit-content;
+  }
+</style> -->
 
 <style>
   :root {
@@ -99,9 +107,6 @@ import "@fontsource-variable/open-sans";
     padding: 0;
   }
 
-  .nav-list > * {
-    flex-basis: 100%;
-  }
   .sticky {
     position: sticky;
     top: calc(-1 * var(--logo-height));

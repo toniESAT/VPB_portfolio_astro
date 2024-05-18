@@ -46,14 +46,18 @@ const target = "#" + filename;
 		width: calc(25% - 2rem);
 		box-shadow: 0 0 10px 10px black;
 		border-radius: 15px;
-		transition: scale 500ms ease-in-out, transform 0s ;
+		transition: scale 500ms ease-in, transform 0s ;
 		cursor: pointer;
+		transition-property: scale, transform;
+		transition-delay: 0ms, 0ms;
 	}
 	
 	.card-wrapper:hover {
 		transform:rotateY(360deg);
-		transition: transform 750ms ease-in-out;
 		scale: 1.1;
+		transition: transform 600ms ease-in;
+		transition-property: scale, transform;
+		transition-delay: 0ms, 300ms;
 	}
 
 
@@ -120,12 +124,13 @@ const target = "#" + filename;
 		border-radius: 15px;
 		opacity 0;
 		transition: all 400ms ease;
-		transition-delay: 350ms;
+		transition-delay: 700ms;
 	}
 
 	.card-wrapper:hover .card-text {
 		opacity: 1;
 		color: white;
+		
 	}
 
 	.character-name{
@@ -134,13 +139,14 @@ const target = "#" + filename;
 
 	@media(max-width: 1024px) {
 		.card-wrapper {
-		width: calc(50% - 2rem);
-  }
+			width: calc(50% - 2rem);
+		}
+	}
 
 	@media(max-width: 640px) {
 		.card-wrapper {
-		width: calc(100% - 2rem);
-  }
-}
+			width: calc(100% - 2rem);
+		}
+	}
 
 </style>

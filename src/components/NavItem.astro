@@ -1,13 +1,14 @@
 ---
 interface Props {
+  title: string;
   isproject?: boolean;
 }
 
-const { isproject = false } = Astro.props;
+const { title, isproject = false } = Astro.props;
 ---
 
 <div class=`nav-item ${isproject ? "project-button" : "" }`>
-  <slot />
+  {title}
   <div class="underline"></div>
 </div>
 
