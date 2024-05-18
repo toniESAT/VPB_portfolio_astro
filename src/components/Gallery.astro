@@ -88,37 +88,38 @@ const img_margin_str = img_margin.toString() + "px";
 </style>
 
 <script is:inline define:vars={{ img_margin, image_width, image_spans }}>
-  let gallery_style = window.getComputedStyle(
-    document.getElementById("gallery"),
-  );
-
-  let isgrid = gallery_style.display == "grid";
-
   function setGalleryDims() {
-    // const ww = gallery_style.width;
-    const ww = document.body.clientWidth;
-
+    let gallery_style = window.getComputedStyle(
+      document.getElementById("gallery"),
+    );
     const images = Array.from(document.getElementsByClassName("gallery-img"));
-    const heights = images.map((img) => img.offsetHeight + 2 * img_margin);
-    const sum_heights = heights.reduce((sum, next) => sum + next, 0);
-    const avg_height = sum_heights / heights.length;
-    const widths = images.map((img) => img.offsetWidth + 2 * img_margin);
-    const num_cols = Math.floor(ww / widths[0]);
 
-    // extra height to prevent uneven image sizes from creating an extra column
-    const gallery_height = sum_heights / num_cols + avg_height;
+    if (gallery_style.display == "flex") {
+      // When the display style is flex, mansory layout is not enabled
 
-    const gallery = document.getElementById("gallery");
-    if (gallery) gallery.style.height = `${gallery_height}px`;
+      const ww = document.body.clientWidth;
 
-    if (isgrid) {
+      const heights = images.map((img) => img.offsetHeight + 2 * img_margin);
+      const sum_heights = heights.reduce((sum, next) => sum + next, 0);
+      const avg_height = sum_heights / heights.length;
+      const widths = images.map((img) => img.offsetWidth + 2 * img_margin);
+      const num_cols = Math.floor(ww / widths[0]);
+
+      // extra height to prevent uneven image sizes from creating an extra column
+      const gallery_height = sum_heights / num_cols + avg_height;
+
+      const gallery = document.getElementById("gallery");
+      if (gallery) gallery.style.height = `${gallery_height}px`;
+    } else {
+      // For the masonry layout, we span wide images across 2 columns
       images.forEach((img, idx) => {
         img.style.width =
-          (image_spans[idx] * image_width +
-          (image_spans[idx] - 1) * img_margin * 2).toString()+"px";
+          (
+            image_spans[idx] * image_width +
+            (image_spans[idx] - 1) * img_margin * 2
+          ).toString() + "px";
       });
     }
-    
   }
 
   setGalleryDims();
