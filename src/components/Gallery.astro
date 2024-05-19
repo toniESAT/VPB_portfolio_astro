@@ -71,7 +71,6 @@ const img_margin_str = img_margin.toString() + "px";
     display: block;
     line-height: 0;
     object-fit: cover;
-    height: 100%;
     cursor: zoom-in;
     border-radius: 6px;
   }
@@ -124,5 +123,5 @@ const img_margin_str = img_margin.toString() + "px";
 
   setGalleryDims();
   window.addEventListener("resize", setGalleryDims);
-  document.addEventListener("astro:page-load", setGalleryDims);
+  document.addEventListener("astro:after-swap", setGalleryDims);
 </script>

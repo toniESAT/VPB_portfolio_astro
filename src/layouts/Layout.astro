@@ -25,7 +25,7 @@ import "@fontsource-variable/open-sans";
 	</head>
 	<body>
 		<Header />
-		<main id="content" transition:animate={fade({ duration: "0.4s" })}>
+		<main id="content">
 			<slot />
 		</main>
 		<Footer />
@@ -48,7 +48,7 @@ import "@fontsource-variable/open-sans";
 
 			main {
 				position: relative;
-				display:flex;
+				display: flex;
 				flex-flow: column nowrap;
 				justify-content: center;
 			}
@@ -78,9 +78,9 @@ import "@fontsource-variable/open-sans";
 				document.body.addEventListener("scroll", addSticky);
 			}
 
-			document.addEventListener("astro:page-load", expand_content);
+			expand_content();
+			document.addEventListener("astro:after-swap", expand_content);
 			document.addEventListener("resize", expand_content);
-			// document.addEventListener("scroll", expand_content);
 
 			function addSticky() {
 				const navbar = document.getElementById("header");

@@ -27,5 +27,7 @@ const img_metadata = await Astro.glob(
   }
   
   expand_content();
-  document.addEventListener("astro:page-load", expand_content);
+  document.addEventListener("astro:after-swap", expand_content);
+  window.addEventListener("resize", expand_content);
+
 </script>
