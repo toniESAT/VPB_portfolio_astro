@@ -70,9 +70,11 @@ const img_margin_str = img_margin.toString() + "px";
   .gallery-img {
     display: block;
     line-height: 0;
+    height: 100%;
     object-fit: cover;
     cursor: zoom-in;
     border-radius: 6px;
+    box-shadow: 1.5px 2px 7px 0.5px gray;
   }
 
   @supports (grid-template-rows: masonry) {

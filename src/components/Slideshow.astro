@@ -14,15 +14,39 @@ const metadata: ImageMetadata[] = img_metadata.map(
 );
 
 const num_images = metadata.length;
-const seconds_per_slide = 3;
+const seconds_per_slide = 4;
 const slideshow_duration = (seconds_per_slide * num_images).toString() + "s";
-const slideshow_perc = (100.0 / num_images).toString() + "%";
+const perc_duration = 100.0 / num_images;
+const half_second = 100.0 / (seconds_per_slide * num_images) / 2;
+const start_animation = half_second.toString() + "%";
+const full_opacity = perc_duration.toString() + "%";
+const end_animation = (half_second + perc_duration).toString() + "%";
+
+const keyframes = `
+  @keyframes fadeslides {
+      0% {
+        opacity: 0;
+      }
+      ${start_animation} {
+        opacity: 1;
+      }
+      ${full_opacity} {
+        opacity: 1;
+      }
+      ${end_animation} {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  `;
 ---
 
 <div class="slideshow" id="slideshow">
   {
     metadata.map((image: ImageMetadata, index: number) => (
-      <a class="img-container" href={"#"}>
+      <a class="img-container" href="/illustration">
         <Image
           class="landing-img"
           src={image}
@@ -36,7 +60,9 @@ const slideshow_perc = (100.0 / num_images).toString() + "%";
   }
 </div>
 
-<style define:vars={{ slideshow_duration, slideshow_perc }}>
+<style set:html={keyframes}></style>
+
+<style define:vars={{ slideshow_duration }}>
   .slideshow {
     background: black;
     position: relative;
@@ -64,17 +90,6 @@ const slideshow_perc = (100.0 / num_images).toString() + "%";
     overflow: hidden;
     opacity: 0;
     transform: scale(1.1);
-    animation: animate var(--slideshow_duration) infinite;
-  }
-
-  @keyframes animate {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    var(--slideshow_perc) {
-      opacity: 0;
-    }
+    animation: var(--slideshow_duration) fadeslides infinite linear;
   }
 </style>
-

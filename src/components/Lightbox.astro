@@ -55,7 +55,7 @@ const getName = (image: ImageMetadata): string =>
             />
           </a>
           <div class="lightbox-text-wrapper">
-            <h3 class="lightbox-title">{getName(image)}</h3>
+            <h3 class="lightbox-text-title">{getName(image)}</h3>
             <div class="lightbox-text" set:html={lorem.generateParagraphs(2)} />
           </div>
         </div>
@@ -106,30 +106,26 @@ const getName = (image: ImageMetadata): string =>
     padding: 2rem;
   }
 
-  .lightbox-content h3 {
-    padding: 0;
-    margin: 0;
-  }
-
   .lightbox-text-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: justify;
-    flex-shrink: 1;
+    overflow: hidden;
   }
 
-  .lightbox-text-wrapper {
+  .lightbox-text {
     overflow-y: scroll;
   }
 
+  .lightbox-text-title {
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 1rem;
+  }
   .lightbox-img-wrapper {
     display: flex;
-    /* height: fit-content; */
     max-height: 100%;
-    flex-shrink: 1;
-
-    /* width: 300px; */
   }
 
   .lightbox-img {
@@ -158,9 +154,35 @@ const getName = (image: ImageMetadata): string =>
     width: 1rem;
   }
 
-  @media (min-width: 1280px) {
+  @media (max-width: 1280px) {
     .lightbox-content {
       flex-direction: column;
     }
+    .lightbox-img-wrapper {
+      height: 50%;
+    }
   }
 </style>
+
+<!-- <script is:inline>
+  function resize_lightbox_img() {
+    let wrappers = Array.from(
+      document.getElementsByClassName("lightbox-img-wrapper"),
+    );
+
+    wrappers.forEach((wrapper) => {
+      ww = wrapper.offsetWidth;
+      wh = wrapper.offsetHeight;
+
+      wrapper_ar = ww / wh;
+
+      img = wrapper.firstElementChild;
+      img_ar = img.naturalWidth / img.naturalHeight;
+
+      if (wrapper_ar > img_ar) 
+
+    });
+  }
+
+  document.addEventListener("resize", resize_lightbox_img);
+</script> -->
