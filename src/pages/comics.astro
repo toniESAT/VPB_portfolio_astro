@@ -9,7 +9,22 @@ const img_metadata = await Astro.glob(
 ---
 
 <Layout title="Comics by Víctor Pérez Brotons">
-	<GalleryAstro img_metadata={img_metadata} />
+	<!-- <GalleryAstro img_metadata={img_metadata} /> -->
+	<div class="placeholder">COMING SOON...</div>
 </Layout>
 
-<style></style>
+<style>
+	.placeholder {
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: black;
+		color: white;
+		font-size: 25pt;
+	}
+</style>
