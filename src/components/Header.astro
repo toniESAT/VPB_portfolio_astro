@@ -1,8 +1,6 @@
 ---
 import NavButton from "./NavButton.astro";
 import NavDropdown from "./NavDropdown.astro";
-
-import "@fontsource-variable/open-sans";
 ---
 
 <header id="header">
@@ -122,6 +120,7 @@ import "@fontsource-variable/open-sans";
     .nav-bar {
       padding: 0;
     }
+
     .nav-list {
       flex-wrap: wrap;
       justify-content: center;
@@ -129,8 +128,8 @@ import "@fontsource-variable/open-sans";
 
     .break {
       flex-basis: 100%;
-      height: 0;
     }
+
     .logo {
       font-size: min(2rem, max(6vw, 10pt));
     }
@@ -147,12 +146,14 @@ import "@fontsource-variable/open-sans";
       position: sticky;
       top: 0;
     }
+
     .sticky {
       position: sticky;
       top: 0;
     }
-    .nav-list {
-    justify-content: flex-end;
 
-}
+    .nav-list {
+      justify-content: flex-end;
+    }
+  }
 </style>

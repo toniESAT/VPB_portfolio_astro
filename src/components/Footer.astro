@@ -1,91 +1,104 @@
 ---
-import { Image } from "astro:assets";
 import FooterButton from "./FooterButton.astro";
 ---
 
 <footer id="footer">
   <div class="flex-container">
-    <div class="flex-item">
-      <ul class="links">
-        <FooterButton href="/about">About me</FooterButton>
-        <FooterButton href="/contact">Contact </FooterButton>
-        <FooterButton href="/privacy">Privacy </FooterButton>
-      </ul>
-    </div>
-    <div class="flex-item">
-      <a href="https://www.esat.es/" class="esat-logo-container">
-        <img
-          class="esat-logo"
-          src="/images/logo-esat.webp"
-          alt="Logo ESAT"
-        />
-      </a>
-    </div>
+    <ul class="footer-buttons">
+      <FooterButton href="/about">About me</FooterButton>
+      <FooterButton href="/about">Contact </FooterButton>
+      <FooterButton href="/privacy">Privacy </FooterButton>
+    </ul>
+    <a href="https://www.esat.es/" class="esat-logo-wrapper">
+      <img class="esat-logo" src="/images/logo-esat.webp" alt="Logo ESAT" />
+    </a>
   </div>
-  <div class="copyright">Copyright © Víctor Pérez Brotons | All Rights Reserved </div>
+  <div class="copyright">
+    Copyright © Víctor Pérez Brotons <span class="sep">|</span><br
+      class="break"
+    /> All Rights Reserved
+  </div>
+
+  <style>
+    footer {
+      position: relative;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-items: space-around;
+      align-items: center;
+      color: white;
+      margin: 0;
+      background-color: black;
+      box-shadow: 0 -2px 5px 0 black;
+      user-select: none;
+      height: min-content;
+      width: 100%;
+    }
+
+    .flex-container {
+      font-size: small;
+      text-transform: uppercase;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-buttons {
+      list-style-type: none;
+      gap: 0.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 10ch;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .esat-logo-wrapper {
+      width: max-content;
+      padding: 0 1rem;
+    }
+
+    .esat-logo {
+      display: block;
+      max-width: 230px;
+      max-height: 95px;
+      object-fit: contain;
+      line-height: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .copyright {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      padding: 1rem;
+      padding-top: 0;
+    }
+
+    .break {
+      display: none;
+    }
+
+    @media (max-width: 576px) {
+      .flex-container {
+        flex-direction: column;
+      }
+
+      .footer-buttons {
+        align-items: center;
+      }
+
+      .break {
+        display: inline;
+      }
+
+      .sep {
+        display: none;
+      }
+    }
+  </style>
 </footer>
-
-<style>
-  footer {
-    display:flex;
-    flex-direction: column;
-    justify-items: space-around;
-    color: white;
-    position: relative;
-    margin: 0;
-    background-color: black;
-    box-shadow: 0 -2px 5px 0 black;
-    user-select:none;    
-    height: 10rem;
-  }
-
-  .flex-container {
-    font-size: small;
-    text-transform: uppercase;
-    display: flex;
-    height: 7rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .flex-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 2rem;
-    height: 100%;
-  }
-
-  .esat-logo-container {
-    height: 80%;
-  }
-
-  .esat-logo {
-    display: block;
-    /* max-width: 230px;
-    max-height: 95px; */
-    object-fit: contain;
-    height: 100%;
-    width: auto;
-  }
-
-  .links {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    height: 100%;
-    width: 10ch;
-
-    padding: 1rem 0;
-    margin: 0;
-    list-style-type: none;
-  }
-
-  .copyright {
-    /* display:block; */
-    text-align: center;
-    padding: 1rem;
-    padding-top:0;
-  }
-</style>
