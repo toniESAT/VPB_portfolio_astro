@@ -19,7 +19,7 @@ const metadata: ImageMetadata[] = img_metadata.map(
   (file: Record<string, any>) => file.default,
 );
 
-shuffleArray(metadata);
+// shuffleArray(metadata);
 
 const image_spans = metadata.map((image) =>
   image.width / image.height > 1.5 ? 2 : 1,
@@ -57,6 +57,29 @@ const img_margin_str = img_margin.toString() + "px";
 
 <Lightbox img_metadata={img_metadata} />
 
+<script is:inline>
+  let shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  };
+
+  let shuffleGallery = () => {
+    gallery = document.getElementById("gallery");
+    images = Array.from(document.getElementsByClassName("img-wrapper"));
+
+    shuffleArray(images);
+
+    images.forEach((img) => gallery.removeChild(img));
+    images.forEach((img) => gallery.appendChild(img));
+
+    gallery.classList.add("visible");
+  };
+
+  document.addEventListener("astro:page-load", shuffleGallery);
+</script>
+
 <style define:vars={{ img_margin_str, image_width_str }}>
   .gallery {
     display: flex;
@@ -66,6 +89,12 @@ const img_margin_str = img_margin.toString() + "px";
     padding: 2rem max(10px, 2vw);
     gap: calc(var(--img_margin_str) * 2);
     height: max-content;
+    opacity: 0;
+    transition: opacity 250ms;
+  }
+
+  .gallery.visible {
+    opacity: 1;
   }
 
   .gallery-img {
