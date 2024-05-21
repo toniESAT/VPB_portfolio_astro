@@ -6,7 +6,7 @@ import NavDropdown from "./NavDropdown.astro";
 <header id="header">
   <div class="logo-container">
     <a href="/">
-      <div class="logo">VÍCTOR PÉREZ BROTONS</div>
+      <div class="logo" id="logo">VÍCTOR PÉREZ BROTONS</div>
     </a>
   </div>
   <div class="spacer"></div>
@@ -28,22 +28,26 @@ import NavDropdown from "./NavDropdown.astro";
 </header>
 
 <script is:inline>
-  let buttons = Array.from(document.getElementsByClassName("nav-item"));
-  buttons.forEach((button_outer) => {
-    button_outer.addEventListener("click", (e) => {
-      buttons.forEach((button_inner) => {
-        if (e.currentTarget == button_inner) {
-          let dropdown_item =
-            document.getElementById("project-dropdown").firstElementChild;
-          if (button_inner.classList.contains("project-button")) {
-            dropdown_item.classList.add("selected");
-          } else {
-            dropdown_item.classList.remove("selected");
-          }
-          button_inner.classList.add("selected");
-        } else button_inner.classList.remove("selected");
-      });
+  buttons = Array.from(document.getElementsByClassName("nav-button"));
+  items = Array.from(document.getElementsByClassName("nav-item"));
+
+  function toggle_underlines(e) {
+    items.forEach((item) => {
+      if (e.currentTarget.firstElementChild == item) {
+        let dropdown_item =
+          document.getElementById("project-dropdown").firstElementChild;
+        if (item.classList.contains("project-button")) {
+          dropdown_item.classList.add("selected");
+        } else {
+          dropdown_item.classList.remove("selected");
+        }
+        item.classList.add("selected");
+      } else item.classList.remove("selected");
     });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", toggle_underlines);
   });
 </script>
 
@@ -53,6 +57,8 @@ import NavDropdown from "./NavDropdown.astro";
   }
 
   header {
+    width: 100%;
+    top:0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -100,6 +106,7 @@ import NavDropdown from "./NavDropdown.astro";
   }
 
   .nav-list {
+    width: 100%;
     display: flex;
     background-color: black;
     list-style-type: none;

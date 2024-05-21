@@ -1,35 +1,88 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Gallery from "../components/Gallery.astro";
+import { getImage } from "astro:assets";
+import etherna_bg from "../assets/images/backgrounds/background_etherna_combined.png";
 
 const img_metadata = await Astro.glob(
   "/src/assets/images/Etherna/*.{jpeg,jpg,png}",
 );
+
+const optimizedBackgroundImage = await getImage({ src: etherna_bg });
+const optimizedBgURL = optimizedBackgroundImage.src;
 ---
 
 <Layout title="Etherna by Víctor Pérez Brotons">
-  <div id="gallery-background"></div>
   <div id="gallery-wrapper">
+    <div id="bg-container"></div>
+
     <Gallery img_metadata={img_metadata} />
   </div>
 </Layout>
 
-<style>
+<style define:vars={{ bgimage: `url(${optimizedBgURL})` }}>
   #gallery-wrapper {
-    position: relative;
-    padding-top: 4rem;
-    /* clip: rect(-64px 500px 500px 500px); */
-  }
+    background-color: black;
 
-  #gallery-background {
-    background-image: url("../assets/images/backgrounds/background_etherna_combined.png");
-    background-size: 100% 100%;
-    /* background-attachment: fixed; */
-    position: fixed;
-    top: 80;
-    left: 0;
+    position: relative;
+    z-index: -10000;
+
     height: 100%;
     width: 100%;
+    clip: rect(inset 0 0 0 0);
+  }
+
+  #bg-container {
+    background-image: var(--bgimage);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% calc(100vh - 4rem);
+
+    background-color: black;
     z-index: -1000;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 100%;
+    width: 100%;
   }
 </style>
+
+<script is:inline>
+  getHeaderOffset = () =>
+    document.getElementById("header").getBoundingClientRect().y +
+    document.getElementById("header").getBoundingClientRect().height;
+
+  getGalleryYpos = () =>
+    document.getElementById("content").getBoundingClientRect().y;
+
+  setBgHeight = () =>
+    document
+      .getElementById("bg-container")
+      .style.setProperty("margin-top", getHeaderOffset().toString() + "px");
+
+  setGalleryClip = () =>
+    document
+      .getElementById("gallery")
+      .style.setProperty(
+        "clip-path",
+        "inset(" +
+          (-getGalleryYpos() + getHeaderOffset() + 34).toString() +
+          "px 0 0 0)",
+      );
+
+  adjust_gallery = () => {
+    setBgHeight();
+    setGalleryClip();
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    adjust_gallery();
+    document.body.addEventListener("scroll", adjust_gallery);
+    window.addEventListener("resize", adjust_gallery);
+  });
+</script>

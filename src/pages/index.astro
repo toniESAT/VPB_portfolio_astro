@@ -30,4 +30,13 @@ const img_metadata = await Astro.glob(
   document.addEventListener("astro:after-swap", expand_content);
   window.addEventListener("resize", expand_content);
 
+  function remove_underlines() {
+    let buttons = Array.from(document.getElementsByClassName("nav-item"));
+    buttons.forEach((button) => button.classList.remove("selected"));
+  }
+
+  remove_underlines();
+  document.getElementById("slideshow").addEventListener("astro:after-swap", remove_underlines);
+
+
 </script>

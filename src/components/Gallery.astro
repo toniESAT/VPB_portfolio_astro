@@ -65,6 +65,7 @@ const img_margin_str = img_margin.toString() + "px";
     align-content: center;
     padding: 2rem max(10px, 2vw);
     gap: calc(var(--img_margin_str) * 2);
+    height: max-content;
   }
 
   .gallery-img {
@@ -92,12 +93,13 @@ const img_margin_str = img_margin.toString() + "px";
 
 <script is:inline define:vars={{ img_margin, image_width, image_spans }}>
   function setGalleryDims() {
-    let gallery_style = window.getComputedStyle(
-      document.getElementById("gallery"),
-    );
+    let gallery = document.getElementById("gallery");
+    let gallery_style = null;
+    if (gallery) gallery_style = window.getComputedStyle(gallery);
+
     const images = Array.from(document.getElementsByClassName("gallery-img"));
 
-    if (gallery_style.display == "flex") {
+    if (gallery_style && gallery_style.display == "flex") {
       // When the display style is flex, mansory layout is not enabled
 
       const ww = document.body.clientWidth;

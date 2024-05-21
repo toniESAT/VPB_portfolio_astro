@@ -5,7 +5,7 @@ interface Props {
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions, fade } from "astro:transitions";
+import { ViewTransitions } from "astro:transitions";
 
 const { title } = Astro.props;
 
@@ -59,6 +59,7 @@ import "@fontsource-variable/open-sans";
 				display: flex;
 				flex-flow: column nowrap;
 				justify-content: center;
+				height: max-content;
 			}
 
 			body {
