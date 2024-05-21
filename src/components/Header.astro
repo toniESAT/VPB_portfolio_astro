@@ -4,11 +4,7 @@ import NavDropdown from "./NavDropdown.astro";
 ---
 
 <header id="header">
-  <div class="logo-container">
-    <a href="/">
-      <div class="logo" id="logo">VÍCTOR PÉREZ BROTONS</div>
-    </a>
-  </div>
+  <a href="/" class="logo">VÍCTOR PÉREZ BROTONS </a>
   <div class="spacer"></div>
   <nav id="navbar" class="nav-bar" transition:persist>
     <ul class="nav-list">
@@ -58,7 +54,7 @@ import NavDropdown from "./NavDropdown.astro";
 
   header {
     width: 100%;
-    top:0;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -75,26 +71,24 @@ import NavDropdown from "./NavDropdown.astro";
     padding: 0 3rem;
   }
 
-  .logo-container {
+  .logo {
     display: flex;
-    height: var(--logo-height);
+    flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
     background-color: black;
-    z-index: 50;
-    max-height: 10vh;
+    height: var(--logo-height);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 0;
+    margin: 0;
+    width: max-content;
+    text-wrap: nowrap;
   }
 
   .spacer {
     flex-basis: 100%;
-  }
-
-  .logo {
-    padding: 10px 0;
-    font-size: 2rem;
-    font-weight: 600;
-    width: max-content;
   }
 
   .nav-bar {
@@ -123,7 +117,7 @@ import NavDropdown from "./NavDropdown.astro";
     width: 100%;
   }
 
-  @media (max-width: 576px) {
+  @media (width < 576px) {
     .nav-bar {
       padding: 0;
     }
@@ -146,7 +140,7 @@ import NavDropdown from "./NavDropdown.astro";
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (width < 1280px) {
     header {
       flex-direction: row;
       justify-content: space-between;

@@ -9,7 +9,7 @@ import FooterButton from "./FooterButton.astro";
       <FooterButton href="/about">Contact </FooterButton>
       <FooterButton href="/privacy">Privacy </FooterButton>
     </ul>
-    <a href="https://www.esat.es/" target="_blank" ="esat-logo-wrapper">
+    <a href="https://www.esat.es/" target="_blank">
       <img class="esat-logo" src="/images/logo-esat.webp" alt="Logo ESAT" />
     </a>
   </div>
@@ -84,7 +84,7 @@ import FooterButton from "./FooterButton.astro";
       display: none;
     }
 
-    @media (max-width: 576px) {
+    @media (width < 576px) {
       .flex-container {
         flex-direction: column;
       }

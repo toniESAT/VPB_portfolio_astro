@@ -23,13 +23,10 @@ const optimizedBgURL = optimizedBackgroundImage.src;
 <style define:vars={{ bgimage: `url(${optimizedBgURL})` }}>
   #gallery-wrapper {
     background-color: black;
-
     position: relative;
     z-index: -10000;
-
     height: 100%;
     width: 100%;
-    clip: rect(inset 0 0 0 0);
   }
 
   #bg-container {
@@ -46,9 +43,6 @@ const optimizedBgURL = optimizedBackgroundImage.src;
     bottom: 0;
     left: 0;
     right: 0;
-
-    height: 100%;
-    width: 100%;
   }
 </style>
 
@@ -60,23 +54,37 @@ const optimizedBgURL = optimizedBackgroundImage.src;
   getGalleryYpos = () =>
     document.getElementById("content").getBoundingClientRect().y;
 
-  setBgHeight = () =>
-    document
-      .getElementById("bg-container")
-      .style.setProperty("margin-top", getHeaderOffset().toString() + "px");
+  setBgDims = () => {
+    let bg_container = document.getElementById("bg-container");
 
-  setGalleryClip = () =>
+    bg_container.style.setProperty(
+      "margin-top",
+      getHeaderOffset().toString() + "px",
+    );
+
+    bg_container.style.setProperty(
+      "background-size",
+      "100% calc(100vh - " + getHeaderOffset().toString() + "px)",
+    );
+  };
+
+  setGalleryClip = () => {
+    ratio = 125 / 2480; // Percentage of bg to hide based on original image
+    viewport_available = window.innerHeight - getHeaderOffset();
+    clip = viewport_available * ratio;
+
     document
       .getElementById("gallery")
       .style.setProperty(
         "clip-path",
         "inset(" +
-          (-getGalleryYpos() + getHeaderOffset() + 34).toString() +
+          (-getGalleryYpos() + getHeaderOffset() + clip).toString() +
           "px 0 0 0)",
       );
+  };
 
   adjust_gallery = () => {
-    setBgHeight();
+    setBgDims();
     setGalleryClip();
   };
 
