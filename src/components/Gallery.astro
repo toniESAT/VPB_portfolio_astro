@@ -19,8 +19,6 @@ const metadata: ImageMetadata[] = img_metadata.map(
   (file: Record<string, any>) => file.default,
 );
 
-// shuffleArray(metadata);
-
 const image_spans = metadata.map((image) =>
   image.width / image.height > 1.5 ? 2 : 1,
 );
@@ -120,7 +118,7 @@ const img_margin_str = img_margin.toString() + "px";
   }
 </style>
 
-<script is:inline define:vars={{ img_margin, image_width, image_spans }}>
+<script is:inline define:vars={{ img_margin, image_width }}>
   function setGalleryDims() {
     let gallery = document.getElementById("gallery");
     let gallery_style = null;
@@ -144,8 +142,13 @@ const img_margin_str = img_margin.toString() + "px";
 
       const gallery = document.getElementById("gallery");
       if (gallery) gallery.style.height = `${gallery_height}px`;
-    } else {
+    } else if (gallery_style) {
       // For the masonry layout, we span wide images across 2 columns
+
+      let image_spans = images.map((image) =>
+        image.naturalWidth / image.naturalHeight > 1.5 ? 2 : 1,
+      );
+
       images.forEach((img, idx) => {
         img.style.width =
           (
