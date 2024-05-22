@@ -24,10 +24,9 @@ const text = lorem.generateParagraphs(1);
 
 const { img, width } = Astro.props;
 const filename = img.src.split("/").pop()?.split("?")[0];
-const target = "#" + filename;
 ---
 
-<a class="card-wrapper" href={target} id={filename}>
+<div class="card-wrapper">
 	<Image
 		class="card-img"
 		src={img}
@@ -38,7 +37,7 @@ const target = "#" + filename;
 	<div class="card-text" set:html={text}>
 		<h3 class="character-name">{filename}</h3>
 		</div>
-</a>
+<div />
 
 <style define:vars={{ cardwidth: width }}>
 	.card-wrapper {
@@ -47,7 +46,7 @@ const target = "#" + filename;
 		box-shadow: 0 0 10px 10px black;
 		border-radius: 15px;
 		transition: scale 500ms ease-in, rotate 0s ;
-		cursor: pointer;
+		/* cursor: pointer; */
 		transition-property: scale, rotate;
 		transition-delay: 0ms, 0ms;
 		will-change: rotate, scale;

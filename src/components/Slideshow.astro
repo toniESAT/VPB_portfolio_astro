@@ -43,6 +43,8 @@ const keyframes = `
   `;
 ---
 
+<style set:html={keyframes}></style>
+
 <div class="slideshow" id="slideshow">
   {
     metadata.map((image: ImageMetadata, index: number) => (
@@ -60,7 +62,6 @@ const keyframes = `
   }
 </div>
 
-<style set:html={keyframes}></style>
 
 <style define:vars={{ slideshow_duration }}>
   .slideshow {
