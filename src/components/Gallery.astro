@@ -103,6 +103,7 @@ const img_margin_str = img_margin.toString() + "px";
 
 <script is:inline define:vars={{ img_margin, image_width }}>
 
+  
   let shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -112,6 +113,9 @@ const img_margin_str = img_margin.toString() + "px";
 
   let shuffleGallery = () => {
     gallery = document.getElementById("gallery");
+
+    if (!gallery) return;
+
     images = Array.from(document.getElementsByClassName("img-wrapper"));
 
     shuffleArray(images);
@@ -123,9 +127,12 @@ const img_margin_str = img_margin.toString() + "px";
   };
 
   function setGalleryDims() {
-    let gallery = document.getElementById("gallery");
-    let gallery_style = null;
-    if (gallery) gallery_style = window.getComputedStyle(gallery);
+
+    gallery = document.getElementById("gallery");
+    
+    if (!gallery) return;
+
+    let gallery_style = window.getComputedStyle(gallery);
 
     const images = Array.from(document.getElementsByClassName("gallery-img"));
     const ww = document.body.clientWidth;
@@ -166,8 +173,8 @@ const img_margin_str = img_margin.toString() + "px";
   }
 
   shuffleAndResize = () => {
-    setGalleryDims();
     shuffleGallery();
+    setGalleryDims();
   }
 
   document.addEventListener("astro:page-load", shuffleAndResize);
