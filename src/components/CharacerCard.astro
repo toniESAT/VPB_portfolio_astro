@@ -46,17 +46,18 @@ const target = "#" + filename;
 		width: calc(25% - 2rem);
 		box-shadow: 0 0 10px 10px black;
 		border-radius: 15px;
-		transition: scale 500ms ease-in, transform 0s ;
+		transition: scale 500ms ease-in, rotate 0s ;
 		cursor: pointer;
-		transition-property: scale, transform;
+		transition-property: scale, rotate;
 		transition-delay: 0ms, 0ms;
+		will-change: rotate, scale;
 	}
 	
 	.card-wrapper:hover {
-		transform:rotateY(360deg);
+		rotate: y 360deg;
 		scale: 1.1;
-		transition: transform 600ms ease-in;
-		transition-property: scale, transform;
+		transition: rotate 600ms ease-in;
+		transition-property: scale, rotate;
 		transition-delay: 0ms, 300ms;
 	}
 
@@ -92,6 +93,7 @@ const target = "#" + filename;
 		border-radius: 15px;
 		transition: all 500ms ease;
 		pointer-events: none;
+		will-change: opacity;
 	}
 
 	.card-wrapper:hover::before {
@@ -125,6 +127,7 @@ const target = "#" + filename;
 		opacity 0;
 		transition: all 400ms ease-in-out;
 		transition-delay: 0ms;
+		will-change: opacity;
 	}
 
 	.card-wrapper:hover .card-text {

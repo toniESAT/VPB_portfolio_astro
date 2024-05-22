@@ -89,10 +89,15 @@ const img_margin_str = img_margin.toString() + "px";
     height: max-content;
     opacity: 0;
     transition: opacity 250ms;
+    will-change: opacity, scroll-position:
   }
 
   .gallery.visible {
     opacity: 1;
+  }
+
+  .img-wrapper{
+    will-change: scroll-position;
   }
 
   .gallery-img {
@@ -105,6 +110,7 @@ const img_margin_str = img_margin.toString() + "px";
     cursor: zoom-in;
     border-radius: 6px;
     box-shadow: 1.5px 2px 7px 0.5px gray;
+    will-change: scroll-position;
   }
 
   @supports (grid-template-rows: masonry) {
