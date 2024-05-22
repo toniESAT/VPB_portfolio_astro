@@ -57,6 +57,8 @@ const optimizedBgURL = optimizedBackgroundImage.src;
   setBgDims = () => {
     let bg_container = document.getElementById("bg-container");
 
+    if (!bg_container) return;
+
     bg_container.style.setProperty(
       "margin-top",
       getHeaderOffset().toString() + "px",
