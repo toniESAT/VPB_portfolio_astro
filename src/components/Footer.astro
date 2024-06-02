@@ -20,7 +20,7 @@ import FooterButton from "./FooterButton.astro";
         class="break"
       /> All Rights Reserved
     </p>
-    <p>Academic project by Antonio Martinez Brotons</p>
+    <p>Academic project by <a class="cv-link" href="cv">Antonio Martinez Brotons</a></p>
   </div>
 
   <style>
@@ -90,6 +90,10 @@ import FooterButton from "./FooterButton.astro";
 
     .break {
       display: none;
+    }
+
+    .cv-link {
+      text-decoration: underline;
     }
 
     @media (width < 576px) {
